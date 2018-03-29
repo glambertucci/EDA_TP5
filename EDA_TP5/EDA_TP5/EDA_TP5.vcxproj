@@ -130,7 +130,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="bitinit.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Worm.cpp" />
