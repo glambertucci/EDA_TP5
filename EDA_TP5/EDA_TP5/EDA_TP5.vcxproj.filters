@@ -38,7 +38,11 @@
     <ClInclude Include="Timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Worm.h">
+=======
+    <ClInclude Include="allegroClass.h">
+>>>>>>> 55fab0748cfb70f6dc15d1c09ec2e8eaa023fabf
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
