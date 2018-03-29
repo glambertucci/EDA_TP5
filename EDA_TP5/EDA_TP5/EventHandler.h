@@ -7,10 +7,7 @@ typedef enum Evnt {
 	NOEVENT, LEFT1, LEFT2, RIGHT1, RIGHT2, JUMP1, JUMP2, TIMER
 };
 
-typedef enum State
-{
-	STILL, MOVE, JUMP
-};
+
 
 typedef class Worm;
 

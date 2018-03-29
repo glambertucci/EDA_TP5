@@ -133,11 +133,13 @@
     <ClCompile Include="bitinit.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Worm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bitinit.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Worm.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
