@@ -135,6 +135,7 @@
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="allegroClass.h" />
     <ClInclude Include="bitinit.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="Timer.h" />
