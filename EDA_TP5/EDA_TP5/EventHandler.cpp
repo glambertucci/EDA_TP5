@@ -1,16 +1,13 @@
+#include <ctype.h>
 #include <vector>
+#include "EventHandler.h"
+
 
 using namespace std;
+Evnt trasformAllegroEvents(int key);
 
 
-typedef enum {
-	LEFT1, LEFT2, RIGHT1, RIGHT2, JUMP1, JUMP2, TIMER
-}evnt;
-typedef class Worm;
-
-void dispatchEvent(evnt ev, vector<Worm> worms);
-
-void dispatchEvent(evnt ev, vector<Worm> worms)
+void dispatchEvent(Evnt ev, vector<Worm> worms)
 {
 	switch (ev)
 	{
@@ -29,4 +26,59 @@ void dispatchEvent(evnt ev, vector<Worm> worms)
 	}
 }
 
-evnt getEvent()
+Evnt trasformAllegroEvents(int key) 
+{
+	Evnt ev = NOEVENT;
+
+	switch (key)
+	{
+	case ALLEGRO_KEY_A:
+		ev = LEFT2;
+		break;
+	case ALLEGRO_KEY_D:
+		ev = RIGHT2;
+		break;
+	case ALLEGRO_KEY_W:
+		ev = JUMP2;
+		break;
+	case ALLEGRO_KEY_LEFT:
+		ev = LEFT1;
+		break;
+	case ALLEGRO_KEY_RIGHT:
+		ev = RIGHT1;
+		break;
+	case ALLEGRO_KEY_UP:
+		ev = JUMP1;
+		break;
+	}
+	return ev;
+}
+
+Evnt getEvent(ALLEGRO_EVENT_QUEUE * eq)
+{
+	ALLEGRO_EVENT ev;
+	Evnt retEv = NOEVENT;
+	int key = NOEVENT;
+
+	Timer timer();
+
+	al_get_next_event(eq, &ev);
+
+	switch (ev.type)
+	{
+	case ALLEGRO_EVENT_KEY_DOWN:
+		timer.start();
+		key = ev.keyboard.keycode;
+		break;
+	case ALLEGRO_EVENT_KEY_UP:
+		timer.stop();
+		if (timer.getTime() >= 100)
+			retEv = trasformAllegroEvents(key);
+		break;
+	case ALLEGRO_EVENT_TIMER:
+		retEv = TIMER;
+		break;
+	}
+	return retEv;
+
+}
