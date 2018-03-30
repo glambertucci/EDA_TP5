@@ -18,7 +18,7 @@ typedef enum State{
 class Worm
 {
 public:
-	Worm();
+	Worm( info * data);
 	~Worm();
 
 	Point getCoord();

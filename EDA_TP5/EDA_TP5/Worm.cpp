@@ -2,8 +2,14 @@
 
 
 
-Worm::Worm()
+Worm::Worm(info * data_)
 {
+	this->data = data_;
+	this->coord.x = this->data->minX + (rand() % (int)(this->data->maxX - this->data->minX)); // Hay que restarle el ancho del strpite
+	this->coord.y = this->data->minY; // Hay que restarle la altura del sprite
+	this->direction = RIGHT;
+	this->state = STILL;
+	this->ticks = 0;
 }
 
 
