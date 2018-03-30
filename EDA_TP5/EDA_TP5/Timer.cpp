@@ -16,13 +16,13 @@ Timer::~Timer()
 
 void Timer::start()
 {
-	this->startValue = high_resolution_clock::now();
+	this->startValue = std::chrono::high_resolution_clock::now();
 	this->getStartValue = true;
 }
 
 void Timer::stop()
 {
-	this->stopValue = high_resolution_clock::now();
+	this->stopValue = std::chrono::high_resolution_clock::now();
 	this->getStopValue = true;
 }
 

@@ -11,7 +11,10 @@
 
 typedef struct
 {
-	int  range = 511; //range of the coordinates   701px>X>1212px
+
+	const float maxX = 1212;
+	const float minX = 701;
+	const float minY = 616;
 	ALLEGRO_BITMAP * walk[WALKTICKS];
 	ALLEGRO_BITMAP * jump[JUMPTICKS];
 	void load(char ** walkAnimation, int sizeWalk, char ** jumpAnimation, int sizeJump)

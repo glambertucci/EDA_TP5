@@ -1,6 +1,7 @@
 #pragma once
 #include "bitinit.h"
 #include <math.h>
+#define GRAV 0.24
 
 typedef struct {
 	float x, y;
@@ -23,7 +24,7 @@ public:
 	Point getCoord();
 
 	void move(Direction a);
-	void jump(Direction a);
+	void jump();
 	void doMove();
 	void doJump();
 

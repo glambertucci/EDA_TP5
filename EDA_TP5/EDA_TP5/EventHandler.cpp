@@ -11,10 +11,10 @@ void dispatchEvent(Evnt ev, vector<Worm> worms)
 {
 	switch (ev)
 	{
-	case LEFT1: worms[0].moveLeft(); break;
-	case LEFT2: worms[1].moveLeft(); break;
-	case RIGHT1:worms[0].moveRight(); break;
-	case RIGHT2:worms[1].moveRight(); break;
+	case LEFT1: worms[0].move(LEFT); break;
+	case LEFT2: worms[1].move(LEFT); break;
+	case RIGHT1:worms[0].move(RIGHT); break;
+	case RIGHT2:worms[1].move(RIGHT); break;
 	case JUMP1:worms[0].jump(); break;
 	case JUMP2:worms[1].jump(); break;
 	case TIMER:
@@ -60,25 +60,27 @@ Evnt getEvent(ALLEGRO_EVENT_QUEUE * eq)
 	Evnt retEv = NOEVENT;
 	int key = NOEVENT;
 
-	Timer timer();
+	Timer * time = new Timer();
 
 	al_get_next_event(eq, &ev);
 
 	switch (ev.type)
 	{
 	case ALLEGRO_EVENT_KEY_DOWN:
-		timer.start();
+		time->start();
 		key = ev.keyboard.keycode;
 		break;
 	case ALLEGRO_EVENT_KEY_UP:
-		timer.stop();
-		if (timer.getTime() >= 100)
+		time->stop();
+		if (time->getTime() >= 100)
 			retEv = trasformAllegroEvents(key);
 		break;
 	case ALLEGRO_EVENT_TIMER:
 		retEv = TIMER;
 		break;
 	}
+
+	delete time;
 	return retEv;
 
 }
