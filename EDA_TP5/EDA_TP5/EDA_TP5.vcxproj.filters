@@ -10,6 +10,9 @@
     <ClCompile Include="Worm.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="allegroClass.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="allegroClass.h">

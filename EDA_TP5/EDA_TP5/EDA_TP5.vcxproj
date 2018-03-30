@@ -130,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="allegroClass.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Worm.cpp" />
