@@ -1,5 +1,5 @@
 #include "Worm.h"
-
+#include <iostream>
 
 
 Worm::Worm(info * data_)
@@ -39,6 +39,7 @@ void Worm::doMove()
 	if (!(abs(this->ticks - 3) % 14))
 		if ((coord.x + 9 <= data->maxX) && (coord.x - 9) >= data->minX)
 			this->coord.x += this->direction * 9;
+	printf("X coord= %f, Y coord = %f\n", coord.x, coord.y); //debug
 }
 
 void Worm::doJump()
@@ -61,17 +62,22 @@ void Worm::draw()
 	case MOVE:
 		for (ALLEGRO_BITMAP * bitmap : this->data->walk)
 		{
-			al_draw_bitmap(bitmap, this->coord.x, this->coord.y, (this->direction == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
+//			al_draw_bitmap(bitmap, this->coord.x, this->coord.y, (this->direction == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
+			al_draw_bitmap(al_load_bitmap("wwalk-F1.png"), (this->coord).x, (this->coord).y, ((this->direction) == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
+
 		}
 		break;
 	case JUMP:
 		for (ALLEGRO_BITMAP * bitmap : this->data->jump)
 		{
-			al_draw_bitmap(bitmap, this->coord.x, this->coord.y, (this->direction == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
+	//		al_draw_bitmap(bitmap, this->coord.x, this->coord.y, (this->direction == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
+			al_draw_bitmap(al_load_bitmap("wwalk-F1.png"), (this->coord).x, (this->coord).y, ((this->direction) == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
+
 		}
 		break;
 	case STILL:
-		al_draw_bitmap(this->data->walk[7], (this->coord).x, (this->coord).y, ((this->direction) == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
+		//al_draw_bitmap(this->data->walk[7], (this->coord).x, (this->coord).y,((this->direction) == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
+		al_draw_bitmap(al_load_bitmap("wwalk-F1.png"), (this->coord).x, (this->coord).y, ((this->direction) == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
 		break;
 	}
 

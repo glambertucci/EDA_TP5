@@ -1,6 +1,7 @@
 #include <ctype.h>
 #include <vector>
 #include "EventHandler.h"
+#include <iostream>
 
 
 using namespace std;
@@ -68,19 +69,21 @@ Evnt getEvent(ALLEGRO_EVENT_QUEUE * eq)
 	{
 	case ALLEGRO_EVENT_KEY_DOWN:
 		time->start();
+		cout << "InCP1" << endl;//debug
 		key = ev.keyboard.keycode;
 		break;
 	case ALLEGRO_EVENT_KEY_UP:
 		time->stop();
 		if (time->getTime() >= 100)
 			retEv = trasformAllegroEvents(key);
+			delete time;
 		break;
 	case ALLEGRO_EVENT_TIMER:
 		retEv = TIMER;
 		break;
 	}
 
-	delete time;
+
 	return retEv;
 
 }

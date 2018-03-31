@@ -23,6 +23,7 @@ allegro_c::allegro_c()
 									{
 										if ((display = al_create_display(SCREEN_W, SCREEN_H)))
 										{
+
 												al_register_event_source(ev_queue, al_get_timer_event_source(timer));
 												al_register_event_source(ev_queue, al_get_keyboard_event_source());
 												if ((background = al_load_bitmap("background.png")) && (stage = al_load_bitmap("Scenario.png")));
