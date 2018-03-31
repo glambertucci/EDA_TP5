@@ -69,17 +69,19 @@ Evnt getEvent(ALLEGRO_EVENT_QUEUE * eq)
 	{
 	case ALLEGRO_EVENT_KEY_DOWN:
 		time->start();
-		cout << "InCP1" << endl;//debug
+	//	cout << "InCP1" << endl;//debug
 		key = ev.keyboard.keycode;
 		break;
 	case ALLEGRO_EVENT_KEY_UP:
 		time->stop();
 		if (time->getTime() >= 100)
 			retEv = trasformAllegroEvents(key);
-			delete time;
+			delete time; //Me parece medio raro lo de delete este time :/  tipo no se si siempre se deletea cachai antes de que se cree otro
 		break;
 	case ALLEGRO_EVENT_TIMER:
 		retEv = TIMER;
+	//	static long unsigned int a= 0;//debug
+	//	cout << "Ticks de timer " << a++ << endl; //debug
 		break;
 	}
 

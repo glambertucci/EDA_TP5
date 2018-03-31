@@ -26,6 +26,7 @@ allegro_c::allegro_c()
 
 												al_register_event_source(ev_queue, al_get_timer_event_source(timer));
 												al_register_event_source(ev_queue, al_get_keyboard_event_source());
+												al_register_event_source(ev_queue, al_get_display_event_source(display));
 												if ((background = al_load_bitmap("background.png")) && (stage = al_load_bitmap("Scenario.png")));
 												{
 													printf("Loaded\n");//debug

@@ -24,7 +24,7 @@ typedef struct
 		{
 			this->walk[i] = al_load_bitmap(walkAnimation[i]); //Loading first walk
 		}
-		for (int i = 1; i < WARMUP; i++)
+		for (int i = 1; i < 3; i++)
 		{
 			for (int a = 0; a < (sizeWalk - 3); a++)
 			{
