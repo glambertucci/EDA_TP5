@@ -18,6 +18,7 @@ int main() {
 	al_draw_bitmap((allegro->getBackground()),0,0,0);
 	al_draw_bitmap(allegro->getStage(),0,0,0);
 	al_flip_display();
+	al_start_timer(allegro->getTimer());
 	data.load(walkFiles, 3, jumpFiles, 3);
 	worms.push_back(&data);
 	worms.push_back(&data);

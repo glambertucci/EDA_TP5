@@ -18,7 +18,7 @@ public:
 	bool load_music(char * music_file);
 	ALLEGRO_BITMAP * getStage();
 	ALLEGRO_BITMAP * getBackground();
-
+	ALLEGRO_TIMER * getTimer();
 private:
 	ALLEGRO_DISPLAY * display;
 	ALLEGRO_EVENT_QUEUE * ev_queue;

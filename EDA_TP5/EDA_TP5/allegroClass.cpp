@@ -91,3 +91,7 @@ ALLEGRO_BITMAP * allegro_c::getStage()
 {
 	return stage;
 }
+ALLEGRO_TIMER * allegro_c::getTimer()
+{
+	return timer;
+}

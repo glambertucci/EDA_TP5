@@ -71,7 +71,7 @@ void Worm::draw()
 		}
 		break;
 	case STILL:
-		al_draw_bitmap(this->data->walk[7], this->coord.x, this->coord.y, (this->direction == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
+		al_draw_bitmap(this->data->walk[7], (this->coord).x, (this->coord).y, ((this->direction) == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
 		break;
 	}
 
