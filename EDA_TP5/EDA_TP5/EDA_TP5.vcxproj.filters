@@ -16,6 +16,9 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="init_arr.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="allegroClass.h">
@@ -31,6 +34,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="EventHandler.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="init_arr.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>
