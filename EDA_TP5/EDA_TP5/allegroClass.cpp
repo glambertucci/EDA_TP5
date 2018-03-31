@@ -25,6 +25,10 @@ allegro_c::allegro_c()
 										{
 												al_register_event_source(ev_queue, al_get_timer_event_source(timer));
 												al_register_event_source(ev_queue, al_get_keyboard_event_source());
+												if ((background = al_load_bitmap("background.png")) && (stage = al_load_bitmap("Scenario.png")));
+												{
+													printf("Loaded\n");//debug
+												}
 										}
 									}
 								}
@@ -46,8 +50,10 @@ allegro_c::allegro_c()
 				fprintf(stderr, "ERROR: Failed to install audio\n");
 		}
 		else
+		{
 			fprintf(stderr, "ERROR: Failed to install keyboard\n");
-		al_uninstall_system();
+			al_uninstall_system();
+		}
 	}
 	else
 		fprintf(stderr, "ERROR: Failed to initialize allegro system\n");
@@ -55,6 +61,8 @@ allegro_c::allegro_c()
 
 allegro_c::~allegro_c()
 {
+	al_destroy_bitmap(background);
+	al_destroy_bitmap(stage);
 	al_shutdown_primitives_addon();
 	al_shutdown_image_addon();
 	al_uninstall_audio();
@@ -74,4 +82,12 @@ bool allegro_c::load_music(char * music_file) //Devuelve 1 si todo salio bien
 ALLEGRO_EVENT_QUEUE * allegro_c::getEventQueue()
 {
 	return ev_queue;
+}
+ALLEGRO_BITMAP * allegro_c::getBackground()
+{
+	return background;
+}
+ALLEGRO_BITMAP * allegro_c::getStage()
+{
+	return stage;
 }

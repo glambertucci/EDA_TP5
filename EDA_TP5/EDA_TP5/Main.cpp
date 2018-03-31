@@ -15,16 +15,22 @@ int main() {
 	vector<Worm> worms;
 	info data;
 	Evnt ev;
-
-	data.load(NULL, 3, NULL, 3);
+	al_draw_bitmap((allegro->getBackground()),0,0,0);
+	al_draw_bitmap(allegro->getStage(),0,0,0);
+	al_flip_display();
+	data.load(walkFiles, 3, jumpFiles, 3);
 	worms.push_back(&data);
 	worms.push_back(&data);
 	
 	while ((ev = getEvent(allegro->getEventQueue())) != QUIT)
+	{
 		if (ev != NOEVENT)
+		{
 			dispatchEvent(ev, worms);
+			al_flip_display();
+		}
 
-
+	}
 	data.unload(3,3);
 	delete allegro;
 }
