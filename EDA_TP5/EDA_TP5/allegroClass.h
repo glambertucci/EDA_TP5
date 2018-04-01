@@ -6,7 +6,7 @@
 #include <allegro5/allegro_acodec.h>
 #include <allegro5/allegro_audio.h>
 
-#define FPS 50
+#define FPS 1
 #define SCREEN_W 1920 
 #define SCREEN_H 696
 class allegro_c
@@ -19,7 +19,6 @@ public:
 	ALLEGRO_BITMAP * getStage();
 	ALLEGRO_BITMAP * getBackground();
 	ALLEGRO_TIMER * getTimer();
-	ALLEGRO_EVENT getEvent();
 	
 private:
 	ALLEGRO_DISPLAY * display = NULL;

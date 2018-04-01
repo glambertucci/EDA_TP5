@@ -24,9 +24,10 @@ allegro_c::allegro_c()
 										if ((display = al_create_display(SCREEN_W, SCREEN_H)))
 										{
 
-												al_register_event_source(ev_queue, al_get_timer_event_source(timer));
+												
 												al_register_event_source(ev_queue, al_get_keyboard_event_source());
 												al_register_event_source(ev_queue, al_get_display_event_source(display));
+												al_register_event_source(ev_queue, al_get_timer_event_source(timer));
 												if ((background = al_load_bitmap("background.png")) && (stage = al_load_bitmap("Scenario.png")));
 												{
 													printf("Loaded\n");//debug
@@ -65,10 +66,13 @@ allegro_c::~allegro_c()
 {
 	al_destroy_bitmap(background);
 	al_destroy_bitmap(stage);
+	al_destroy_display(display);
+	al_destroy_timer(timer);
+	al_destroy_event_queue(ev_queue);
 	al_shutdown_primitives_addon();
 	al_shutdown_image_addon();
 	al_uninstall_audio();
-	al_uninstall_system();
+	//l_uninstall_system();
 }
 bool allegro_c::load_music(char * music_file) //Devuelve 1 si todo salio bien
 {
@@ -98,12 +102,3 @@ ALLEGRO_TIMER * allegro_c::getTimer()
 	return timer;
 }
 
-ALLEGRO_EVENT allegro_c::getEvent()
-{
-	ALLEGRO_EVENT ev;
-	al_install_keyboard();
-	al_register_event_source(ev_queue, al_get_keyboard_event_source());
-
-	al_get_next_event(this->ev_queue, &ev);
-	return ev;
-}

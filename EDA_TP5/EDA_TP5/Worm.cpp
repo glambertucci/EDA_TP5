@@ -60,16 +60,16 @@ void Worm::draw()
 	switch (this->state)
 	{
 	case MOVE:
-		for (ALLEGRO_BITMAP * bitmap : this->data->walk)
-		{
-			al_draw_bitmap(bitmap, this->coord.x, this->coord.y, (this->direction == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
-		}
+		//for (ALLEGRO_BITMAP * bitmap : this->data->walk)
+		//{
+			al_draw_bitmap(this->data->walk[this->ticks -1], this->coord.x, this->coord.y, (this->direction == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
+		//}
 		break;
 	case JUMP:
-		for (ALLEGRO_BITMAP * bitmap : this->data->jump)
-		{
-			al_draw_bitmap(bitmap, this->coord.x, this->coord.y, (this->direction == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
-		}
+		//for (ALLEGRO_BITMAP * bitmap : this->data->jump)
+		//{
+			al_draw_bitmap(this->data->jump[this->ticks - 1], this->coord.x, this->coord.y, (this->direction == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
+		//}
 		break;
 	case STILL:
 		al_draw_bitmap(data->walk[7], (this->coord).x, (this->coord).y,((this->direction) == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));

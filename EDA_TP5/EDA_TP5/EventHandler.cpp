@@ -25,6 +25,7 @@ void dispatchEvent(Evnt ev, vector<Worm> worms)
 			worm.draw();
 		}
 	}
+
 }
 
 Evnt trasformAllegroEvents(int key) 
@@ -55,16 +56,18 @@ Evnt trasformAllegroEvents(int key)
 	return ev;
 }
 
-Evnt getEvent(ALLEGRO_EVENT ev)
+Evnt getEvent(ALLEGRO_EVENT_QUEUE * eq)
 {
-	//ALLEGRO_EVENT ev;
+	ALLEGRO_EVENT ev;
 	Evnt retEv = NOEVENT;
-	int key = NOEVENT;
-	Timer * time = NULL;
+	static int key = NOEVENT;
+	static Timer * time = NULL;
 	
 
-	//al_get_next_event(eq, &ev);
+	al_get_next_event(eq, &ev);
 
+	if (al_is_event_source_registered(eq, al_get_keyboard_event_source()))
+		printf("puto");
 	switch (ev.type)
 	{
 	case ALLEGRO_EVENT_KEY_DOWN:

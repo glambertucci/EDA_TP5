@@ -13,4 +13,4 @@ typedef enum Evnt {
 
 
 void dispatchEvent(Evnt ev, vector<Worm> worms);
-Evnt getEvent(ALLEGRO_EVENT ev);
+Evnt getEvent(ALLEGRO_EVENT_QUEUE *  eq);

@@ -24,7 +24,7 @@ int main() {
 	worms.push_back(&data);
 	worms.push_back(&data);
 	
-	while ((ev = getEvent(allegro->getEvent())) != QUIT)
+	while ((ev = getEvent(allegro->getEventQueue())) != QUIT)
 	{
 		if (ev != NOEVENT)
 		{
@@ -33,7 +33,8 @@ int main() {
 		}
 
 	}
-	cout << "sali" << endl;// debug
+	//cout << "sali" << endl;// debug
 	data.unload(15,10);
 	delete allegro;
+	return 0;
 }
