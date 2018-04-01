@@ -15,9 +15,10 @@ using namespace std;
 typedef struct
 {
 
-	const float maxX = 1212;
-	const float minX = 701;
-	const float minY = 616;
+	const float maxX = 1212.0;
+	const float minX = 701.0;
+	const float minY = 616.0;
+	const float maxY = (616 - 33.0);
 	array<ALLEGRO_BITMAP *, WALKTICKS> walk;
 	array<ALLEGRO_BITMAP *, JUMPTICKS> jump;
 

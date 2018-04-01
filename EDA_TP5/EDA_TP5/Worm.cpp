@@ -1,7 +1,7 @@
 #include "Worm.h"
 #include <iostream>
 
-
+using namespace std;
 Worm::Worm(info * data_)
 {
 	this->data = data_;
@@ -15,6 +15,7 @@ Worm::Worm(info * data_)
 
 Worm::~Worm()
 {
+	
 }
 
 Point Worm::getCoord()
@@ -24,13 +25,21 @@ Point Worm::getCoord()
 
 void Worm::move(Direction a)
 {
+	if (prev_state != JUMP)
+	{
 	this->direction = a;
+	prev_state = state;
 	this->state = MOVE;
+	}
 }
 
 void Worm::jump()
 {
-	this->state = JUMP;
+	if (prev_state != MOVE )
+	{
+		prev_state = state;
+		this->state = JUMP;
+	}
 }
 
 void Worm::doMove()
@@ -43,13 +52,16 @@ void Worm::doMove()
 
 void Worm::doJump()
 {
-	this->ticks++;
-					 /// >3
+
+	printf("X coord= %f, Y coord = %f\n", coord.x, coord.y); //debug		 /// >3
 	if (this->ticks >= 0 && this->ticks < JUMPTICKS)
 	{
-		if ((coord.x + cos(ALLEGRO_PI/3.0)*4.5 <= data->maxX) && (coord.x - cos(ALLEGRO_PI / 3.0)*4.5) >= data->minX)
+		if ((coord.x + cos(ALLEGRO_PI / 3.0)*4.5 <= data->maxX) && (coord.x - cos(ALLEGRO_PI / 3.0)*4.5) >= data->minX)
+		{
 			this->coord.x += this->direction * cos(ALLEGRO_PI / 3.0)*4.5;
-		if ((this->coord.y <= this->data->minY) && ((this->coord.y) >= this->data->minY - 31) && rising)//this->data->minY 1000
+			this->ticks++;
+		}
+		if ((this->coord.y <= this->data->minY) && ((this->coord.y) >= this->data->maxY) && rising)//this->data->minY 1000
 		{
 			this->coord.y += -sin(ALLEGRO_PI / 3.0)*4.5 - GRAV /2.0;
 			if ((int)(coord.y) == (int) (data->minY - 34)) //Delicioso magic numbers
@@ -61,13 +73,14 @@ void Worm::doJump()
 			if ((int)coord.y == (int)this->data->minY)
 			{
 				rising = true;
+				coord.y = data->minY;
 				ticks = JUMPTICKS;
 			}
 		}
-//		printf("Ticks value is %d \n", ticks);//Debug
-//		printf("Rising value is %d \n",rising);//debug
+//			printf("Ticks value is %d \n", ticks);//Debug
+	//	printf("Rising value is %d \n",rising);//debug
 	}
-//	printf("X coord= %f, Y coord = %f\n", coord.x, coord.y); //debug
+	//printf("X coord= %f, Y coord = %f\n", coord.x, coord.y); //debug
 
 }
 
@@ -92,24 +105,43 @@ void Worm::draw()
 
 void Worm::update()
 {
+
 	switch (this->state)
 	{
+		
 	case MOVE: 
-		if (this->ticks < WALKTICKS)
-			this->doMove();
-		else
+		if (prev_state != JUMP)
 		{
-			this->state = STILL;
-			this->ticks = 0;
+			if (this->ticks < WALKTICKS)
+			{
+				this->doMove();
+				prev_state = MOVE;
+			}
+			else
+			{
+				this->state = STILL;
+				prev_state = STILL;
+				this->ticks = 0;
+			}
+
 		}
+		
 		break;
 	case JUMP:
-		if (this->ticks < JUMPTICKS)
-			this->doJump();
-		else
+		cout << "state is " << state << endl << "prev state is " << prev_state << endl;
+		if (prev_state != MOVE)
 		{
-			this->state = STILL;
-			this->ticks = 0;
+			if (this->ticks < JUMPTICKS)
+			{
+				this->doJump();
+				prev_state = JUMP;
+			}
+			else
+			{
+				this->state = STILL;
+				prev_state = STILL;
+				this->ticks = 0;
+			}
 		}
 		break;
 	case STILL:
