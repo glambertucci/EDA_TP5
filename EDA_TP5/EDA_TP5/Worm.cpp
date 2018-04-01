@@ -96,6 +96,7 @@ void Worm::update()
 			this->ticks = 0;
 		}
 	case STILL:
+		this->ticks = 0;
 		break;
 	}
 }
