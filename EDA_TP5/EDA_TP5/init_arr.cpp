@@ -1,5 +1,5 @@
 #include "init_arr.h"
-void fillJump(char ** jumpF)
+void fillJump(array<char *, 10>& jumpF)
 {
 	jumpF[0] = (char *)"wjump-F1.png";
 	jumpF[1] = (char *)"wjump-F2.png";
@@ -13,7 +13,7 @@ void fillJump(char ** jumpF)
 	jumpF[9] = (char *)"wjump-F10.png";
 }
 
-void fillWalk(char ** walkF)
+void fillWalk(array<char *, 15>& walkF)
 {
 	walkF[0] = (char *)"wwalk-F1.png";
 	walkF[1] = (char *)"wwalk-F2.png";

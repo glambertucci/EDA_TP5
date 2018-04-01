@@ -28,10 +28,7 @@ allegro_c::allegro_c()
 												al_register_event_source(ev_queue, al_get_keyboard_event_source());
 												al_register_event_source(ev_queue, al_get_display_event_source(display));
 												al_register_event_source(ev_queue, al_get_timer_event_source(timer));
-												if ((background = al_load_bitmap("background.png")) && (stage = al_load_bitmap("Scenario.png")));
-												{
-													printf("Loaded\n");//debug
-												}
+												al_start_timer(this->timer);
 										}
 									}
 								}
@@ -64,8 +61,6 @@ allegro_c::allegro_c()
 
 allegro_c::~allegro_c()
 {
-	al_destroy_bitmap(background);
-	al_destroy_bitmap(stage);
 	al_destroy_display(display);
 	al_destroy_timer(timer);
 	al_destroy_event_queue(ev_queue);
@@ -89,14 +84,7 @@ ALLEGRO_EVENT_QUEUE * allegro_c::getEventQueue()
 {
 	return ev_queue;
 }
-ALLEGRO_BITMAP * allegro_c::getBackground()
-{
-	return background;
-}
-ALLEGRO_BITMAP * allegro_c::getStage()
-{
-	return stage;
-}
+
 ALLEGRO_TIMER * allegro_c::getTimer()
 {
 	return timer;

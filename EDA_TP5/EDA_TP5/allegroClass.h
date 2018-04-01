@@ -16,15 +16,11 @@ public:
 	~allegro_c();
 	ALLEGRO_EVENT_QUEUE * getEventQueue();
 	bool load_music(char * music_file);
-	ALLEGRO_BITMAP * getStage();
-	ALLEGRO_BITMAP * getBackground();
 	ALLEGRO_TIMER * getTimer();
 	
 private:
 	ALLEGRO_DISPLAY * display = NULL;
 	ALLEGRO_EVENT_QUEUE * ev_queue = NULL;
 	ALLEGRO_SAMPLE * music = NULL;
-	ALLEGRO_BITMAP * background = NULL;
-	ALLEGRO_BITMAP * stage = NULL;
 	ALLEGRO_TIMER * timer = NULL;
 };

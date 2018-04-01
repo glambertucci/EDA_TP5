@@ -66,8 +66,8 @@ Evnt getEvent(ALLEGRO_EVENT_QUEUE * eq)
 
 	al_get_next_event(eq, &ev);
 
-	if (al_is_event_source_registered(eq, al_get_keyboard_event_source()))
-		printf("puto");
+	//if (al_is_event_source_registered(eq, al_get_keyboard_event_source()))
+		//printf("puto");
 	switch (ev.type)
 	{
 	case ALLEGRO_EVENT_KEY_DOWN:

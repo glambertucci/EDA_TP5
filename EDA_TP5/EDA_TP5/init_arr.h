@@ -1,3 +1,6 @@
 #pragma once
-void fillJump(char ** jumpF);
-void fillWalk(char ** walkF);//Fills arrays
+#include <array>
+using namespace std;
+
+void fillJump(array<char *, 10>& jumpF);
+void fillWalk(array<char *, 15>& walkF);//Fills arrays

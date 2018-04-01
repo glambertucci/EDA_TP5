@@ -19,6 +19,7 @@
     <ClCompile Include="init_arr.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="Stage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="allegroClass.h">
@@ -39,6 +40,7 @@
     <ClInclude Include="init_arr.h">
       <Filter>Header files</Filter>
     </ClInclude>
+    <ClInclude Include="Stage.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

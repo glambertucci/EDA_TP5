@@ -1,6 +1,9 @@
 #pragma once
 #include <allegro5\allegro.h>
 #include<allegro5\allegro_image.h>
+#include <array>
+
+using namespace std;
 
 
 #define WARMUP 3
@@ -17,8 +20,10 @@ typedef struct
 	const float minY = 616;
 	ALLEGRO_BITMAP * walk[WALKTICKS];
 	ALLEGRO_BITMAP * jump[JUMPTICKS];
-	void load(char ** walkAnimation, int sizeWalk, char ** jumpAnimation, int sizeJump)
+
+	void load( array<char *,15>& walkAnimation, array<char *, 10>& jumpAnimation)
 	{
+		int sizeWalk = walkAnimation.size();
 		//Moving 
 		for (int i = 0; i < sizeWalk; i++)
 		{
