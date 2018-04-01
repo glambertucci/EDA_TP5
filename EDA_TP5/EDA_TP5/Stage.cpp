@@ -25,7 +25,7 @@ void Stage::draw()
 
 void Stage::createWorms(info * data)
 {
-	this->worms.push_back(Worm(data));
+	this->worms.push_back(Worm(data)); //Implemented with vectors
 	this->worms.push_back(Worm(data));
 }
 

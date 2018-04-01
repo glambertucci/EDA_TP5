@@ -11,7 +11,8 @@ using namespace std;
 #define LANDING 43
 #define WALKTICKS 45 
 #define JUMPTICKS 43
-
+#define WALKPICS 15
+#define JUMPPICS 10
 typedef struct
 {
 
@@ -22,7 +23,7 @@ typedef struct
 	array<ALLEGRO_BITMAP *, WALKTICKS> walk;
 	array<ALLEGRO_BITMAP *, JUMPTICKS> jump;
 
-	void load( array< char [14],15>& walkAnimation, array< char[14], 10>& jumpAnimation)  //Loading the animations
+	void load( array< char [14], WALKPICS>& walkAnimation, array< char[14], 10>& jumpAnimation)  //Loading the animations
 	{
 		int sizeWalk = walkAnimation.size();
 		//Moving 
