@@ -16,10 +16,7 @@ public:
 	void loadImages(const char * stage_, const char * backg_);
 	vector<Worm> worms;
 private:
-	
 	ALLEGRO_BITMAP * stageBitmap;
 	ALLEGRO_BITMAP * backgroundBitmap;
-
-
 };
 

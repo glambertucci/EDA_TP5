@@ -4,7 +4,7 @@
 
 
 typedef struct {		
-	float x, y;
+	float x, y; 
 }Point;
  
 typedef enum Direction{
@@ -21,7 +21,7 @@ public:
 	Worm(info * data);
 	~Worm();
 
-	void move(Direction a);
+	void move(Direction a); 
 	void jump();
 
 	void draw();
@@ -29,7 +29,7 @@ public:
 private:
 	void doMove();		//This functions should not be accesible from outside the object as they are only called from update.
 	void doJump();		//To use them ypu should set the state using 'move' and 'jump'
-	bool isXValid();
+	bool isXValid();	
 
 	Direction direction;
 	Point coord;
