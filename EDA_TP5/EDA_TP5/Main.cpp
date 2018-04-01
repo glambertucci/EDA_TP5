@@ -15,8 +15,8 @@ int main() {
 	Stage stage;
 	info data;
 	
-	array< char[14], 15> walk = fillWalk("wwalk-F");
-	array<char [14], 10> jump = fillJump("wjump-F");
+	array< char[14], 15> walk = fillWalk("wwalk-F",".png");
+	array<char [14], 10> jump = fillJump("wjump-F",".png");
 
 	data.load(walk, jump);
 	stage.createWorms(&data);
