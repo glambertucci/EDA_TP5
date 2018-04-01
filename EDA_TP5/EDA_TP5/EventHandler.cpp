@@ -70,15 +70,21 @@ Evnt getEvent(ALLEGRO_EVENT_QUEUE * eq)
 	switch (ev.type)
 	{
 	case ALLEGRO_EVENT_KEY_DOWN:
-		 time = new Timer();
-		time->start();
+		if (time == NULL)
+		{
+			time = new Timer();
+			time->start();
+		}
 		break;
 	case ALLEGRO_EVENT_KEY_UP:
-		time->stop();
-		if (time->getTime() >= 100)
-			retEv = trasformAllegroEvents(ev.keyboard.keycode);
-			delete time; //Me parece medio raro lo de delete este time :/  tipo no se si siempre se deletea cachai antes de que se cree otro
-		
+		if (time != NULL)
+		{
+			time->stop();
+			if (time->getTime() >= 100)
+				retEv = trasformAllegroEvents(ev.keyboard.keycode);
+			delete time;
+			time = NULL;
+		}
 		break;
 	case ALLEGRO_EVENT_TIMER:
 		retEv = TIMER;
