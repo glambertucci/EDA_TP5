@@ -9,7 +9,7 @@ using namespace std;
 #define WARMUP 3
 #define AIRTIME 36
 #define LANDING 43
-#define WALKTICKS 45
+#define WALKTICKS 45 
 #define JUMPTICKS 43
 
 typedef struct
@@ -18,8 +18,8 @@ typedef struct
 	const float maxX = 1212;
 	const float minX = 701;
 	const float minY = 616;
-	ALLEGRO_BITMAP * walk[WALKTICKS];
-	ALLEGRO_BITMAP * jump[JUMPTICKS];
+	array<ALLEGRO_BITMAP *, WALKTICKS> walk;
+	array<ALLEGRO_BITMAP *, JUMPTICKS> jump;
 
 	void load( array<char *,15>& walkAnimation, array<char *, 10>& jumpAnimation)
 	{
