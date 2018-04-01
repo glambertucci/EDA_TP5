@@ -1,6 +1,9 @@
 #pragma once
 #include <array>
+#include <string>
 using namespace std;
 
-void fillJump(array<char *, 10>& jumpF);
-void fillWalk(array<char *, 15>& walkF);//Fills arrays
+
+
+array< char[14], 10> fillJump(const char * path);
+array< char [14], 15> fillWalk(string path);

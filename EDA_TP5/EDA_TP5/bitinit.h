@@ -21,7 +21,7 @@ typedef struct
 	array<ALLEGRO_BITMAP *, WALKTICKS> walk;
 	array<ALLEGRO_BITMAP *, JUMPTICKS> jump;
 
-	void load( array<char *,15>& walkAnimation, array<char *, 10>& jumpAnimation)
+	void load( array< char [14],15>& walkAnimation, array< char[14], 10>& jumpAnimation)
 	{
 		int sizeWalk = walkAnimation.size();
 		//Moving 
@@ -30,7 +30,7 @@ typedef struct
 			this->walk[i] = al_load_bitmap(walkAnimation[i]); //Loading first walk
 		}
 		for (int i = 1; i < 3; i++)
-		{								//-3
+		{								
 			for (int a = 0; a < (sizeWalk ); a++)
 			{
 				walk[sizeWalk*i + a ] = walk[(a > 11 ? a - 1 : a)]; //Repeating for full movement
