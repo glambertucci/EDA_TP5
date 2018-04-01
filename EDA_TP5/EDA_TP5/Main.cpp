@@ -21,7 +21,9 @@ int main() {
 	data.load(walk, jump);
 	stage.createWorms(&data);
 	stage.loadImages("Scenario.png", "background.png");
-
+	allegro.load_music( "master_race.wav");
+	allegro.play_music();
+	
 	Evnt ev;
 
 	while ((ev = getEvent(allegro.getEventQueue())) != QUIT)

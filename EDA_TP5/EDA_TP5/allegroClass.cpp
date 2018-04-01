@@ -68,7 +68,7 @@ allegro_c::~allegro_c()
 	al_shutdown_image_addon();
 	al_uninstall_audio();
 }
-bool allegro_c::load_music(char * music_file) //Devuelve 1 si todo salio bien
+bool allegro_c::load_music(const char * music_file) //Devuelve 1 si todo salio bien
 {
 	bool result;
 	if ((music = al_load_sample(music_file)))
@@ -89,3 +89,12 @@ ALLEGRO_EVENT_QUEUE * allegro_c::getEventQueue()
 	return ev_queue;
 }
 
+void allegro_c::play_music()
+{
+	al_play_sample(music, 1.0, 1.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
+}
+
+void allegro_c::stop_music()
+{
+	al_stop_samples();
+}
