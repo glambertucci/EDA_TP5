@@ -79,13 +79,13 @@ bool allegro_c::load_music(char * music_file) //Devuelve 1 si todo salio bien
 
 }
 
+void allegro_c::updateDisplay()
+{
+	al_flip_display();
+}
+
 ALLEGRO_EVENT_QUEUE * allegro_c::getEventQueue()
 {
 	return ev_queue;
-}
-
-ALLEGRO_TIMER * allegro_c::getTimer()
-{
-	return timer;
 }
 

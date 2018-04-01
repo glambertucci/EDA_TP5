@@ -52,7 +52,7 @@ void Worm::doMove()
 
 void Worm::doJump()
 {
-
+	this->ticks++;
 	printf("X coord= %f, Y coord = %f\n", coord.x, coord.y); //debug		 /// >3
 	if (this->ticks >= 0 && this->ticks < JUMPTICKS)
 	{

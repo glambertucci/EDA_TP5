@@ -22,9 +22,6 @@ int main() {
 	stage.createWorms(&data);
 	stage.loadImages("Scenario.png", "background.png");
 
-	stage.draw();
-	al_flip_display();
-
 	Evnt ev;
 
 	while ((ev = getEvent(allegro.getEventQueue())) != QUIT)
@@ -32,7 +29,7 @@ int main() {
 		if (ev != NOEVENT)
 		{
 			dispatchEvent(ev, stage);
-			al_flip_display();
+			allegro.updateDisplay();
 		}
 
 	}

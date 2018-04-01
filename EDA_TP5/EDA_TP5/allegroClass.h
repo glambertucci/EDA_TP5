@@ -16,7 +16,7 @@ public:
 	~allegro_c();
 	ALLEGRO_EVENT_QUEUE * getEventQueue();
 	bool load_music(char * music_file);
-	ALLEGRO_TIMER * getTimer();
+	void updateDisplay();
 	
 private:
 	ALLEGRO_DISPLAY * display = NULL;
