@@ -19,11 +19,13 @@ public:
 	ALLEGRO_BITMAP * getStage();
 	ALLEGRO_BITMAP * getBackground();
 	ALLEGRO_TIMER * getTimer();
+	ALLEGRO_EVENT getEvent();
+	
 private:
-	ALLEGRO_DISPLAY * display;
-	ALLEGRO_EVENT_QUEUE * ev_queue;
-	ALLEGRO_SAMPLE * music;
-	ALLEGRO_BITMAP * background;
-	ALLEGRO_BITMAP * stage;
-	ALLEGRO_TIMER * timer;
+	ALLEGRO_DISPLAY * display = NULL;
+	ALLEGRO_EVENT_QUEUE * ev_queue = NULL;
+	ALLEGRO_SAMPLE * music = NULL;
+	ALLEGRO_BITMAP * background = NULL;
+	ALLEGRO_BITMAP * stage = NULL;
+	ALLEGRO_TIMER * timer = NULL;
 };

@@ -97,3 +97,13 @@ ALLEGRO_TIMER * allegro_c::getTimer()
 {
 	return timer;
 }
+
+ALLEGRO_EVENT allegro_c::getEvent()
+{
+	ALLEGRO_EVENT ev;
+	al_install_keyboard();
+	al_register_event_source(ev_queue, al_get_keyboard_event_source());
+
+	al_get_next_event(this->ev_queue, &ev);
+	return ev;
+}

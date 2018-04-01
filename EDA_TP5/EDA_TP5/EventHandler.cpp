@@ -55,19 +55,20 @@ Evnt trasformAllegroEvents(int key)
 	return ev;
 }
 
-Evnt getEvent(ALLEGRO_EVENT_QUEUE * eq)
+Evnt getEvent(ALLEGRO_EVENT ev)
 {
-	ALLEGRO_EVENT ev;
+	//ALLEGRO_EVENT ev;
 	Evnt retEv = NOEVENT;
 	int key = NOEVENT;
+	Timer * time = NULL;
+	
 
-	Timer * time = new Timer();
-
-	al_get_next_event(eq, &ev);
+	//al_get_next_event(eq, &ev);
 
 	switch (ev.type)
 	{
 	case ALLEGRO_EVENT_KEY_DOWN:
+		 time = new Timer();
 		time->start();
 	//	cout << "InCP1" << endl;//debug
 		key = ev.keyboard.keycode;
@@ -82,6 +83,9 @@ Evnt getEvent(ALLEGRO_EVENT_QUEUE * eq)
 		retEv = TIMER;
 	//	static long unsigned int a= 0;//debug
 	//	cout << "Ticks de timer " << a++ << endl; //debug
+		break;
+	case ALLEGRO_EVENT_DISPLAY_CLOSE:
+		retEv = QUIT;
 		break;
 	}
 
