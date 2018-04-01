@@ -1,5 +1,7 @@
 #include "Worm.h"
-#include <iostream>
+#include <math.h>
+
+
 
 using namespace std;
 Worm::Worm(info * data_)
@@ -16,24 +18,23 @@ Worm::Worm(info * data_)
 
 Worm::~Worm()
 {
-	
 }
 
 void Worm::move(Direction a)
 {
-	if (prev_state != JUMP)
+	if (this->prev_state != JUMP)
 	{
 	this->direction = a;
-	prev_state = state;
+	this->prev_state = state;
 	this->state = MOVE;
 	}
 }
 
 void Worm::jump()
 {
-	if (prev_state != MOVE )
+	if (this->prev_state != MOVE )
 	{
-		prev_state = state;
+		this->prev_state = state;
 		this->state = JUMP;
 	}
 }
@@ -42,7 +43,7 @@ void Worm::doMove()
 {
 	this->ticks++;
 	if (!(abs(this->ticks - 3) % 14))
-		if (isXValid())
+		if (this->isXValid())
 			this->coord.x += this->direction * 9;
 }
 
@@ -52,14 +53,14 @@ void Worm::doJump()
 	if (this->ticks >= 0 && this->ticks < JUMPTICKS)
 	{
 		if (isXValid())
-		{
-			this->coord.x += this->direction * cos(ALLEGRO_PI / 3.0)*4.5;
+		{	
+			this->coord.x += this->direction * cos(this->degrees60)*this->speed;
 		}
 		if ((this->coord.y <= this->data->minY))
 		{
-			this->coord.y =( data->minY - 4.5 * ticks *sin(ALLEGRO_PI / 3.0) + GRAV * ticks*ticks /2);
+			this->coord.y =( data->minY - this->speed * ticks *sin(this->degrees60) + this->gravity * ticks*ticks /2.0);
 		}
-		if (ticks == JUMPTICKS - 1)
+		if (this->ticks == JUMPTICKS - 1)
 			this->coord.y = this->data->minY;
 	
 	}
@@ -70,9 +71,9 @@ bool Worm::isXValid()
 {
 	bool retValue = false;
 
-	if ((this->direction == LEFT) && ((coord.x + 9) > data->minX))
+	if ((this->direction == LEFT) && ((this->coord.x + 9) > data->minX))
 		retValue = true;
-	else if ((this->direction == RIGHT) && (coord.x + 49< data->maxX))
+	else if ((this->direction == RIGHT) && (this->coord.x + 49< data->maxX))
 		retValue = true;
 
 	return retValue;
@@ -104,17 +105,17 @@ void Worm::update()
 	{
 		
 	case MOVE: 
-		if (prev_state != JUMP)
+		if (this->prev_state != JUMP)
 		{
 			if (this->ticks < WALKTICKS)
 			{
 				this->doMove();
-				prev_state = MOVE;
+				this->prev_state = MOVE;
 			}
 			else
 			{
 				this->state = STILL;
-				prev_state = STILL;
+				this->prev_state = STILL;
 				this->ticks = 0;
 			}
 
@@ -122,17 +123,17 @@ void Worm::update()
 		
 		break;
 	case JUMP:
-		if (prev_state != MOVE)
+		if (this->prev_state != MOVE)
 		{
 			if (this->ticks < JUMPTICKS)
 			{
 				this->doJump();
-				prev_state = JUMP;
+				this->prev_state = JUMP;
 			}
 			else
 			{
 				this->state = STILL;
-				prev_state = STILL;
+				this->prev_state = STILL;
 				this->ticks = 0;
 			}
 		}

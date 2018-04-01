@@ -1,9 +1,9 @@
 #pragma once
 #include "bitinit.h"
-#include <math.h>
-#define GRAV 0.24
 
-typedef struct {
+
+
+typedef struct {		
 	float x, y;
 }Point;
  
@@ -18,25 +18,28 @@ typedef enum State{
 class Worm
 {
 public:
-	Worm( info * data);
+	Worm(info * data);
 	~Worm();
 
 	void move(Direction a);
 	void jump();
-	void doMove();
-	void doJump();
-	bool isXValid();
-	bool isYValid();
 
 	void draw();
 	void update();
 private:
-	bool rising = true;
+	void doMove();		//This functions should not be accesible from outside the object as they are only called from update.
+	void doJump();		//To use them ypu should set the state using 'move' and 'jump'
+	bool isXValid();
+
 	Direction direction;
 	Point coord;
 	State prev_state;
 	State state;
 	int ticks;
 	info * data;
+
+	const float gravity = 0.24;
+	const float degrees60 = ALLEGRO_PI / 3.0;
+	const float speed = 4.5;
 };
 
