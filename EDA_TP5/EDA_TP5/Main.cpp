@@ -10,18 +10,15 @@ using namespace std;
 int main() {
 
 	srand(time(NULL));
-	array<char *, 15> walkFiles;
-	array<char *, 10> jumpFiles;
-
-	fillJump(jumpFiles);
-	fillWalk(walkFiles);
-
 
 	allegro_c allegro;
 	Stage stage;
 	info data;
+	
+	array< char[14], 15> walk = fillWalk("wwalk-F");
+	array<char [14], 10> jump = fillJump("wjump-F");
 
-	data.load(walkFiles, jumpFiles);
+	data.load(walk, jump);
 	stage.createWorms(&data);
 	stage.loadImages("Scenario.png", "background.png");
 
