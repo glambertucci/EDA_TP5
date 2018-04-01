@@ -57,23 +57,17 @@ void Worm::doJump()
 
 void Worm::draw()
 {
+	int flag = (this->direction == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0);
 	switch (this->state)
 	{
 	case MOVE:
-		//for (ALLEGRO_BITMAP * bitmap : this->data->walk)
-		//{
-			al_draw_bitmap(this->data->walk[this->ticks -1], this->coord.x, this->coord.y, (this->direction == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
-		//}
+			al_draw_bitmap(this->data->walk[this->ticks -1], this->coord.x, this->coord.y,flag );
 		break;
 	case JUMP:
-		//for (ALLEGRO_BITMAP * bitmap : this->data->jump)
-		//{
-			al_draw_bitmap(this->data->jump[this->ticks - 1], this->coord.x, this->coord.y, (this->direction == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
-		//}
+			al_draw_bitmap(this->data->jump[this->ticks - 1], this->coord.x, this->coord.y, flag);
 		break;
 	case STILL:
-		al_draw_bitmap(data->walk[7], (this->coord).x, (this->coord).y,((this->direction) == RIGHT ? ALLEGRO_FLIP_HORIZONTAL : 0));
-
+		al_draw_bitmap(this->data->walk[7], (this->coord).x, (this->coord).y, flag);
 		break;
 	}
 

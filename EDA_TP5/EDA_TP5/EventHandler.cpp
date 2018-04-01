@@ -8,7 +8,7 @@ using namespace std;
 Evnt trasformAllegroEvents(int key);
 
 
-void dispatchEvent(Evnt ev, vector<Worm> worms)
+void dispatchEvent(Evnt ev, vector<Worm>& worms)
 {
 	switch (ev)
 	{
@@ -28,7 +28,7 @@ void dispatchEvent(Evnt ev, vector<Worm> worms)
 
 }
 
-Evnt trasformAllegroEvents(int key) 
+Evnt trasformAllegroEvents(int key)
 {
 	Evnt ev = NOEVENT;
 
@@ -66,6 +66,7 @@ Evnt getEvent(ALLEGRO_EVENT_QUEUE * eq)
 									// que se toco una tecla y lo destruyo cuando dejan de apretarla.
 	al_get_next_event(eq, &ev);
 
+	//al_wait_for_event(eq, &ev);
 
 	switch (ev.type)
 	{
