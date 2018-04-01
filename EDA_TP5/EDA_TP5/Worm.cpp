@@ -5,10 +5,11 @@ using namespace std;
 Worm::Worm(info * data_)
 {
 	this->data = data_;
-	this->coord.x = this->data->minX + (rand() % (int)(this->data->maxX - this->data->minX)) ; // Hay que restarle el ancho del strpite
-	this->coord.y = this->data->minY; // Hay que restarle la altura del sprite
+	this->coord.x = this->data->minX + (rand() % (int)(this->data->maxX - this->data->minX - al_get_bitmap_width(this->data->walk[0]))) ; 
+	this->coord.y = this->data->minY; 
 	this->direction = RIGHT;
 	this->state = STILL;
+	this->prev_state = STILL;
 	this->ticks = 0;
 }
 
@@ -16,11 +17,6 @@ Worm::Worm(info * data_)
 Worm::~Worm()
 {
 	
-}
-
-Point Worm::getCoord()
-{
-	return this->coord;
 }
 
 void Worm::move(Direction a)
@@ -46,19 +42,19 @@ void Worm::doMove()
 {
 	this->ticks++;
 	if (!(abs(this->ticks - 3) % 14))
-		if ((coord.x + 9 <= data->maxX) && (coord.x - 9) >= data->minX)
+		if (isXValid())
 			this->coord.x += this->direction * 9;
 }
 
 void Worm::doJump()
 {
-
+	this->ticks++;
 	if (this->ticks >= 0 && this->ticks < JUMPTICKS)
 	{
 		if (ticks == 1)
 			y0 = coord.y;
 
-		if ((coord.x + cos(ALLEGRO_PI / 3.0)*4.5 <= data->maxX) && (coord.x - cos(ALLEGRO_PI / 3.0)*4.5) >= data->minX)
+		if (isXValid())
 		{
 			this->coord.x += this->direction * cos(ALLEGRO_PI / 3.0)*4.5;
 		}
@@ -71,6 +67,18 @@ void Worm::doJump()
 	
 	}
 
+}
+
+bool Worm::isXValid()
+{
+	bool retValue = false;
+
+	if ((this->direction == LEFT) && ((coord.x + 9) > data->minX))
+		retValue = true;
+	else if ((this->direction == RIGHT) && (coord.x + 49< data->maxX))
+		retValue = true;
+
+	return retValue;
 }
 
 void Worm::draw()

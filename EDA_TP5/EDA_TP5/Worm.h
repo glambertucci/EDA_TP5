@@ -21,12 +21,12 @@ public:
 	Worm( info * data);
 	~Worm();
 
-	Point getCoord();
-
 	void move(Direction a);
 	void jump();
 	void doMove();
 	void doJump();
+	bool isXValid();
+	bool isYValid();
 
 	void draw();
 	void update();
@@ -35,7 +35,7 @@ private:
 	Direction direction;
 	Point coord;
 	double y0;
-	State prev_state = STILL;
+	State prev_state;
 	State state;
 	int ticks;
 	info * data;
