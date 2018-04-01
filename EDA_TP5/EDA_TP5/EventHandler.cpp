@@ -53,6 +53,9 @@ Evnt trasformAllegroEvents(int key)
 	case ALLEGRO_KEY_UP:
 		ev = JUMP1;
 		break;
+	case ALLEGRO_KEY_ESCAPE:
+		ev = QUIT;
+		break;
 	}
 	return ev;
 }

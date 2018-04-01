@@ -52,8 +52,7 @@ void Worm::doMove()
 
 void Worm::doJump()
 {
-	ticks++;
-	//printf("X coord= %f, Y coord = %f\n", coord.x, coord.y); //debug		 /// >3
+
 	if (this->ticks >= 0 && this->ticks < JUMPTICKS)
 	{
 		if (ticks == 1)
@@ -118,7 +117,6 @@ void Worm::update()
 		
 		break;
 	case JUMP:
-//		cout << "state is " << state << endl << "prev state is " << prev_state << endl; //debug
 		if (prev_state != MOVE)
 		{
 			if (this->ticks < JUMPTICKS)
