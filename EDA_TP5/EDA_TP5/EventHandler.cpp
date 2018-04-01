@@ -1,7 +1,6 @@
 #include <ctype.h>
 #include <vector>
 #include "EventHandler.h"
-#include <iostream>
 
 
 using namespace std;
