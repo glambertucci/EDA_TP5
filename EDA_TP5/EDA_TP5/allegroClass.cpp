@@ -62,6 +62,8 @@ allegro_c::allegro_c()
 allegro_c::~allegro_c()
 {
 	al_destroy_display(display);
+	al_stop_samples();
+	al_destroy_sample(music);
 	al_destroy_timer(timer);
 	al_destroy_event_queue(ev_queue);
 	al_shutdown_primitives_addon();
@@ -92,9 +94,4 @@ ALLEGRO_EVENT_QUEUE * allegro_c::getEventQueue()
 void allegro_c::play_music()
 {
 	al_play_sample(music, 1.0, 1.0, 1.0, ALLEGRO_PLAYMODE_LOOP, NULL);
-}
-
-void allegro_c::stop_music()
-{
-	al_stop_samples();
 }

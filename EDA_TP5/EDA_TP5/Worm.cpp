@@ -51,19 +51,16 @@ void Worm::doJump()
 	this->ticks++;
 	if (this->ticks >= 0 && this->ticks < JUMPTICKS)
 	{
-		if (ticks == 1)
-			y0 = coord.y;
-
 		if (isXValid())
 		{
 			this->coord.x += this->direction * cos(ALLEGRO_PI / 3.0)*4.5;
 		}
 		if ((this->coord.y <= this->data->minY))
 		{
-			coord.y =( y0 - 4.5 * ticks *sin(ALLEGRO_PI / 3.0) + GRAV * ticks*ticks /2);
+			this->coord.y =( data->minY - 4.5 * ticks *sin(ALLEGRO_PI / 3.0) + GRAV * ticks*ticks /2);
 		}
 		if (ticks == JUMPTICKS - 1)
-			coord.y = y0;
+			this->coord.y = this->data->minY;
 	
 	}
 

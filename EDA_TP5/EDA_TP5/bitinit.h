@@ -22,7 +22,7 @@ typedef struct
 	array<ALLEGRO_BITMAP *, WALKTICKS> walk;
 	array<ALLEGRO_BITMAP *, JUMPTICKS> jump;
 
-	void load( array< char [14],15>& walkAnimation, array< char[14], 10>& jumpAnimation)
+	void load( array< char [14],15>& walkAnimation, array< char[14], 10>& jumpAnimation)  //Loading the animations
 	{
 		int sizeWalk = walkAnimation.size();
 		//Moving 

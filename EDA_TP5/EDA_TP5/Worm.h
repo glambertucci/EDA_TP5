@@ -34,7 +34,6 @@ private:
 	bool rising = true;
 	Direction direction;
 	Point coord;
-	double y0;
 	State prev_state;
 	State state;
 	int ticks;

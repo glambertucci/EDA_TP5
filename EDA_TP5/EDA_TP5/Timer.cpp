@@ -16,7 +16,7 @@ Timer::~Timer()
 
 void Timer::start()
 {
-	this->startValue = std::chrono::high_resolution_clock::now();
+	this->startValue = std::chrono::high_resolution_clock::now(); //Neat use for std lib
 	this->getStartValue = true;
 }
 

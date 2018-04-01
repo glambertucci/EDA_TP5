@@ -13,4 +13,6 @@ typedef enum Evnt {
 
 
 void dispatchEvent(Evnt ev, Stage& stage);
+//Input, the event and the current stage
 Evnt getEvent(ALLEGRO_EVENT_QUEUE *  eq);
+//gets the next event from diferent sources;
