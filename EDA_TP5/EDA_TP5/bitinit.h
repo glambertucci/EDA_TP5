@@ -33,7 +33,7 @@ typedef struct
 		{
 			for (int a = 0; a < (sizeWalk - 3); a++)
 			{
-				walk[sizeWalk*i + a] = walk[(a > 11 ? a - 1 : a)]; //Repeating for full movement
+				walk[sizeWalk*i + a ] = walk[(a > 11 ? a - 1 : a)]; //Repeating for full movement
 			}
 		}
 		//Jumping

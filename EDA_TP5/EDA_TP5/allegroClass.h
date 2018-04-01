@@ -18,7 +18,7 @@ public:
 	bool load_music(char * music_file);
 	ALLEGRO_TIMER * getTimer();
 	
-//private:
+private:
 	ALLEGRO_DISPLAY * display = NULL;
 	ALLEGRO_EVENT_QUEUE * ev_queue = NULL;
 	ALLEGRO_SAMPLE * music = NULL;

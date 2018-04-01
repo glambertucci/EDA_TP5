@@ -34,7 +34,7 @@ int main() {
 	{
 		if (ev != NOEVENT)
 		{
-			dispatchEvent(ev, stage.worms);
+			dispatchEvent(ev, stage);
 			al_flip_display();
 		}
 

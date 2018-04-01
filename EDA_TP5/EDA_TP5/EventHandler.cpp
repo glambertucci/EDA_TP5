@@ -8,18 +8,19 @@ using namespace std;
 Evnt trasformAllegroEvents(int key);
 
 
-void dispatchEvent(Evnt ev, vector<Worm>& worms)
+void dispatchEvent(Evnt ev, Stage& stage)
 {
 	switch (ev)
 	{
-	case LEFT1: worms[0].move(LEFT); break;
-	case LEFT2: worms[1].move(LEFT); break;
-	case RIGHT1:worms[0].move(RIGHT); break;
-	case RIGHT2:worms[1].move(RIGHT); break;
-	case JUMP1:worms[0].jump(); break;
-	case JUMP2:worms[1].jump(); break;
+	case LEFT1: stage.worms[0].move(LEFT); break;
+	case LEFT2: stage.worms[1].move(LEFT); break;
+	case RIGHT1:stage.worms[0].move(RIGHT); break;
+	case RIGHT2:stage.worms[1].move(RIGHT); break;
+	case JUMP1:stage.worms[0].jump(); break;
+	case JUMP2:stage.worms[1].jump(); break;
 	case TIMER:
-		for (Worm& worm : worms)
+		stage.draw();
+		for (Worm& worm : stage.worms)
 		{
 			worm.update();
 			worm.draw();
@@ -60,21 +61,17 @@ Evnt getEvent(ALLEGRO_EVENT_QUEUE * eq)
 {
 	ALLEGRO_EVENT ev;
 	Evnt retEv = NOEVENT;
-	//static int key = NOEVENT;
 	static Timer * time = NULL;		// Ya se que no deberiamos usar 'static' pero necesito que este objeto no se destruya al terminar
 									// la funcion ya que es el encargado de regular el tiempo. Creo este objeto solo cuando se detecta 
 									// que se toco una tecla y lo destruyo cuando dejan de apretarla.
 	al_get_next_event(eq, &ev);
 
-	//al_wait_for_event(eq, &ev);
 
 	switch (ev.type)
 	{
 	case ALLEGRO_EVENT_KEY_DOWN:
 		 time = new Timer();
 		time->start();
-	//	cout << "InCP1" << endl;//debug
-		//key = ev.keyboard.keycode;
 		break;
 	case ALLEGRO_EVENT_KEY_UP:
 		time->stop();
@@ -84,8 +81,6 @@ Evnt getEvent(ALLEGRO_EVENT_QUEUE * eq)
 		break;
 	case ALLEGRO_EVENT_TIMER:
 		retEv = TIMER;
-	//	static long unsigned int a= 0;//debug
-	//	cout << "Ticks de timer " << a++ << endl; //debug
 		break;
 	case ALLEGRO_EVENT_DISPLAY_CLOSE:
 		retEv = QUIT;

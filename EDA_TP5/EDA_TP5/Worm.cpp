@@ -61,11 +61,11 @@ void Worm::draw()
 	switch (this->state)
 	{
 	case MOVE:
-			al_draw_bitmap(this->data->walk[this->ticks -1], this->coord.x, this->coord.y,flag );
-		break;
+			//al_draw_bitmap(this->data->walk[this->ticks -1], this->coord.x, this->coord.y,flag );
+		//break;
 	case JUMP:
-			al_draw_bitmap(this->data->jump[this->ticks - 1], this->coord.x, this->coord.y, flag);
-		break;
+		//	al_draw_bitmap(this->data->jump[this->ticks - 1], this->coord.x, this->coord.y, flag);
+		//break;
 	case STILL:
 		al_draw_bitmap(this->data->walk[7], (this->coord).x, (this->coord).y, flag);
 		break;
@@ -82,13 +82,19 @@ void Worm::update()
 		if (this->ticks <= WALKTICKS)
 			this->doMove();
 		else
+		{
 			this->state = STILL;
+			this->ticks = 0;
+		}
 		break;
 	case JUMP:
 		if (this->ticks <= JUMPTICKS)
 			this->doJump();
 		else
+		{
 			this->state = STILL;
+			this->ticks = 0;
+		}
 	case STILL:
 		break;
 	}
