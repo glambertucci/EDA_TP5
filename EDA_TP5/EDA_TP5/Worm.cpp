@@ -83,7 +83,7 @@ void Worm::update()
 	switch (this->state)
 	{
 	case MOVE: 
-		if (this->ticks <= WALKTICKS)
+		if (this->ticks < WALKTICKS)
 			this->doMove();
 		else
 		{
@@ -92,7 +92,7 @@ void Worm::update()
 		}
 		break;
 	case JUMP:
-		if (this->ticks <= JUMPTICKS)
+		if (this->ticks < JUMPTICKS)
 			this->doJump();
 		else
 		{
