@@ -78,6 +78,7 @@ Evnt getEvent(ALLEGRO_EVENT_QUEUE * eq)
 		if (time->getTime() >= 100)
 			retEv = trasformAllegroEvents(ev.keyboard.keycode);
 			delete time; //Me parece medio raro lo de delete este time :/  tipo no se si siempre se deletea cachai antes de que se cree otro
+		
 		break;
 	case ALLEGRO_EVENT_TIMER:
 		retEv = TIMER;

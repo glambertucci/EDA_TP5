@@ -30,8 +30,8 @@ typedef struct
 			this->walk[i] = al_load_bitmap(walkAnimation[i]); //Loading first walk
 		}
 		for (int i = 1; i < 3; i++)
-		{
-			for (int a = 0; a < (sizeWalk - 3); a++)
+		{								//-3
+			for (int a = 0; a < (sizeWalk ); a++)
 			{
 				walk[sizeWalk*i + a ] = walk[(a > 11 ? a - 1 : a)]; //Repeating for full movement
 			}

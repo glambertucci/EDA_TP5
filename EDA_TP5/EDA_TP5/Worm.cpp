@@ -39,20 +39,24 @@ void Worm::doMove()
 	if (!(abs(this->ticks - 3) % 14))
 		if ((coord.x + 9 <= data->maxX) && (coord.x - 9) >= data->minX)
 			this->coord.x += this->direction * 9;
-//	printf("X coord= %f, Y coord = %f\n", coord.x, coord.y); //debug
 }
 
 void Worm::doJump()
 {
 	this->ticks++;
-
-	if (this->ticks >= 3 && this->ticks <= 33 + 3)
+					 /// >3
+	if (this->ticks >= 0 && this->ticks <= 33 + 3)
 	{
 		if ((coord.x + cos(ALLEGRO_PI/3.0)*4.5 <= data->maxX) && (coord.x - cos(ALLEGRO_PI / 3.0)*4.5) >= data->minX)
 			this->coord.x += this->direction * cos(ALLEGRO_PI / 3.0)*4.5;
-		if (this->coord.y <= this->data->minY)
-			this->coord.y += this->direction * sin(ALLEGRO_PI / 3.0)*4.5 - GRAV /2.0;
+		if ((this->coord.y <= this->data->minY) &&((this->coord.y) >=this->data->minY -31) )//this->data->minY 1000
+			this->coord.y += -sin(ALLEGRO_PI / 3.0)*4.5 - GRAV /2.0;
+		else 
+			this->coord.y += sin(ALLEGRO_PI / 3.0)*4.5 - GRAV / 2.0;
+
 	}
+//	printf("X coord= %f, Y coord = %f\n", coord.x, coord.y); //debug
+
 }
 
 void Worm::draw()
@@ -61,11 +65,11 @@ void Worm::draw()
 	switch (this->state)
 	{
 	case MOVE:
-			//al_draw_bitmap(this->data->walk[this->ticks -1], this->coord.x, this->coord.y,flag );
-		//break;
+			al_draw_bitmap(this->data->walk[this->ticks -1], this->coord.x, this->coord.y,flag );
+		break;
 	case JUMP:
-		//	al_draw_bitmap(this->data->jump[this->ticks - 1], this->coord.x, this->coord.y, flag);
-		//break;
+			al_draw_bitmap(this->data->jump[this->ticks - 1], this->coord.x, this->coord.y, flag);
+		break;
 	case STILL:
 		al_draw_bitmap(this->data->walk[7], (this->coord).x, (this->coord).y, flag);
 		break;
