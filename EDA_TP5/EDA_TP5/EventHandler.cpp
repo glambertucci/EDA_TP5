@@ -60,26 +60,25 @@ Evnt getEvent(ALLEGRO_EVENT_QUEUE * eq)
 {
 	ALLEGRO_EVENT ev;
 	Evnt retEv = NOEVENT;
-	static int key = NOEVENT;
-	static Timer * time = NULL;
-	
-
+	//static int key = NOEVENT;
+	static Timer * time = NULL;		// Ya se que no deberiamos usar 'static' pero necesito que este objeto no se destruya al terminar
+									// la funcion ya que es el encargado de regular el tiempo. Creo este objeto solo cuando se detecta 
+									// que se toco una tecla y lo destruyo cuando dejan de apretarla.
 	al_get_next_event(eq, &ev);
 
-	//if (al_is_event_source_registered(eq, al_get_keyboard_event_source()))
-		//printf("puto");
+
 	switch (ev.type)
 	{
 	case ALLEGRO_EVENT_KEY_DOWN:
 		 time = new Timer();
 		time->start();
 	//	cout << "InCP1" << endl;//debug
-		key = ev.keyboard.keycode;
+		//key = ev.keyboard.keycode;
 		break;
 	case ALLEGRO_EVENT_KEY_UP:
 		time->stop();
 		if (time->getTime() >= 100)
-			retEv = trasformAllegroEvents(key);
+			retEv = trasformAllegroEvents(ev.keyboard.keycode);
 			delete time; //Me parece medio raro lo de delete este time :/  tipo no se si siempre se deletea cachai antes de que se cree otro
 		break;
 	case ALLEGRO_EVENT_TIMER:
