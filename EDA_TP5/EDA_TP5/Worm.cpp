@@ -45,15 +45,27 @@ void Worm::doJump()
 {
 	this->ticks++;
 					 /// >3
-	if (this->ticks >= 0 && this->ticks <= 33 + 3)
+	if (this->ticks >= 0 && this->ticks < JUMPTICKS)
 	{
 		if ((coord.x + cos(ALLEGRO_PI/3.0)*4.5 <= data->maxX) && (coord.x - cos(ALLEGRO_PI / 3.0)*4.5) >= data->minX)
 			this->coord.x += this->direction * cos(ALLEGRO_PI / 3.0)*4.5;
-		if ((this->coord.y <= this->data->minY) &&((this->coord.y) >=this->data->minY -31) )//this->data->minY 1000
+		if ((this->coord.y <= this->data->minY) && ((this->coord.y) >= this->data->minY - 31) && rising)//this->data->minY 1000
+		{
 			this->coord.y += -sin(ALLEGRO_PI / 3.0)*4.5 - GRAV /2.0;
-		else 
+			if ((int)(coord.y) == (int) (data->minY - 34)) //Delicioso magic numbers
+				rising = false;
+		}
+		else if ((this->coord.y <= this->data->minY))
+		{
 			this->coord.y += sin(ALLEGRO_PI / 3.0)*4.5 - GRAV / 2.0;
-
+			if ((int)coord.y == (int)this->data->minY)
+			{
+				rising = true;
+				ticks = JUMPTICKS;
+			}
+		}
+//		printf("Ticks value is %d \n", ticks);//Debug
+//		printf("Rising value is %d \n",rising);//debug
 	}
 //	printf("X coord= %f, Y coord = %f\n", coord.x, coord.y); //debug
 
@@ -99,6 +111,7 @@ void Worm::update()
 			this->state = STILL;
 			this->ticks = 0;
 		}
+		break;
 	case STILL:
 		this->ticks = 0;
 		break;

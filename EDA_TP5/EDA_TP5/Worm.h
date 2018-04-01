@@ -31,6 +31,7 @@ public:
 	void draw();
 	void update();
 private:
+	bool rising = true;
 	Direction direction;
 	Point coord;
 	State state;
