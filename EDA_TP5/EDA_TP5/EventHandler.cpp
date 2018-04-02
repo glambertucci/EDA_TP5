@@ -102,39 +102,11 @@ bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 		break;
 	case ALLEGRO_EVENT_KEY_UP:
 		cout << "Tecla de Salida:" << ev.keyboard.keycode << endl;
-		if (this->events[0].time != NULL)
-		{
-			if (this->events[0].keycode == ev.keyboard.keycode)
-			{
-				cout << "evento N:" << 0 << ".\tTime es:" << this->events[0].time << endl;
-				this->events[0].time->stop();
-				if (this->events[0].time->getTime() >= 100)
-					this->events[0].activate();
-				delete this->events[0].time;
-				this->events[0].time = NULL;
-				cout << "Timer " << 0 << "destroyed" << endl;
-			}
-		}
-		if (this->events[1].time != NULL)
-		{
-			if (this->events[1].keycode == ev.keyboard.keycode)
-			{
-				cout << "evento N:" << 1 << ".\tTime es:" << this->events[1].time << endl;
-				this->events[1].time->stop();
-				if (this->events[1].time->getTime() >= 100)
-					this->events[1].activate();
-				delete this->events[1].time;
-				this->events[1].time = NULL;
-				cout << "Timer " << 1 << "destroyed" << endl;
-			}
-		}
 
-		/*for (int i = 0; i < 2; ++i)
+		for (int i = 0; i < 2; ++i)
 		{
-			if (this->events[i].time != NULL)
+			if (this->events[i].time != NULL && this->events[i].Event == trasformAllegroEvents(ev.keyboard.keycode))
 			{
-				if (this->events[i].keycode == ev.keyboard.keycode )
-				{
 					cout << "evento N:" << i << ".\tTime es:" << this->events[i].time << endl;
 					this->events[i].time->stop();
 					if (this->events[i].time->getTime() >= 100)
@@ -142,10 +114,9 @@ bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 					delete this->events[i].time;
 					this->events[i].time = NULL;
 					cout << "Timer " << i << "destroyed" << endl;
-				}
 				
 			}
-		}*/
+		}
 		break;
 	case ALLEGRO_EVENT_TIMER:
 		this->setEvent(TIMER, 2);
