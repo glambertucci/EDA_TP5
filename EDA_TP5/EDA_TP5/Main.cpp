@@ -12,6 +12,7 @@ int main() {
 	srand(time(NULL));
 
 	allegro_c allegro;
+	EventHandler eventHandler;
 	Stage stage;
 	info data;
 	
@@ -26,11 +27,11 @@ int main() {
 	
 	Evnt ev;
 
-	while ((ev = getEvent(allegro.getEventQueue())) != QUIT)
+	while (eventHandler.getEvent(allegro.getEventQueue()))
 	{
 		if (ev != NOEVENT)
 		{
-			dispatchEvent(ev, stage);
+			eventHandler.dispatchEvent(ev, stage);
 			allegro.updateDisplay();
 		}
 
