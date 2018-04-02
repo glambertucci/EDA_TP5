@@ -42,9 +42,9 @@ void Worm::jump()
 void Worm::doMove()
 {
 	this->ticks++;
-	if (!(abs(this->ticks - 3) % 14))
+	if (!(abs(this->ticks - 3) % this->RepeatedFramesPerCycle))
 		if (this->isXValid())
-			this->coord.x += this->direction * 9;
+			this->coord.x += this->direction * this->pixelsPerCycle;
 }
 
 void Worm::doJump()

@@ -15,6 +15,9 @@ Stage::~Stage()
 		al_destroy_bitmap(this->backgroundBitmap);
 	if (this->stageBitmap)
 		al_destroy_bitmap(this->stageBitmap);
+
+	for (int i = 0; i < worms.size(); i++)
+		worms.pop_back();
 }
 
 void Stage::draw()

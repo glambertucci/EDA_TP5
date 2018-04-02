@@ -12,6 +12,7 @@ int main() {
 	srand(time(NULL));
 
 	allegro_c allegro;
+	EventHandler eventHandler;
 	Stage stage;
 	info data;
 	
@@ -24,13 +25,12 @@ int main() {
 	allegro.load_music( "master_race.wav");
 	allegro.play_music();
 	
-	Evnt ev;
-
-	while ((ev = getEvent(allegro.getEventQueue())) != QUIT)
+	
+	while (eventHandler.getEvent(allegro.getEventQueue()))
 	{
-		if (ev != NOEVENT)
+		if (eventHandler.isThereEvent())
 		{
-			dispatchEvent(ev, stage);
+			eventHandler.handleEventDispatcher(stage);
 			allegro.updateDisplay();
 		}
 
