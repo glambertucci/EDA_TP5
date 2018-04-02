@@ -15,6 +15,7 @@ typedef struct {
 	Evnt Event;
 	Timer * time;
 	bool active;
+	int keycode;
 
 	void activate() {
 		active = true;

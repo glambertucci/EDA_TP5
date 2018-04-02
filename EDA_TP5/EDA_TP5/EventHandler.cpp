@@ -11,14 +11,14 @@ void EventHandler::dispatchEvent(Evnt ev, Stage& stage)
 {
 	switch (ev)
 	{
-	case LEFT1: if (stage.worms[0].animationEnded())stage.worms[0].move(LEFT); else this->events[0].deactivate(); break;
-	case LEFT2: if (stage.worms[1].animationEnded())stage.worms[1].move(LEFT); else this->events[1].deactivate(); break;
-	case RIGHT1:if (stage.worms[0].animationEnded())stage.worms[0].move(RIGHT); else this->events[0].deactivate(); break;
-	case RIGHT2:if (stage.worms[1].animationEnded())stage.worms[1].move(RIGHT); else this->events[1].deactivate(); break;
-	case JUMP1:if (stage.worms[0].animationEnded())stage.worms[0].jump(); else this->events[0].deactivate(); break;
-	case JUMP2:if (stage.worms[1].animationEnded())stage.worms[1].jump(); else this->events[1].deactivate(); break;
-	case NOEVENT: if (stage.worms[0].animationEnded() && this->events[0].Event == NOEVENT)this->events[0].deactivate(); 
-		if (stage.worms[1].animationEnded() && this->events[1].Event == NOEVENT)this->events[1].deactivate(); break;
+	case LEFT1: stage.worms[0].move(LEFT); break; //if (stage.worms[0].animationEnded())stage.worms[0].move(LEFT); else this->events[0].deactivate(); break;
+	case LEFT2: stage.worms[1].move(LEFT); break; //if (stage.worms[1].animationEnded())stage.worms[1].move(LEFT); else this->events[1].deactivate(); break;
+	case RIGHT1:stage.worms[0].move(RIGHT); break; //if (stage.worms[0].animationEnded())stage.worms[0].move(RIGHT); else this->events[0].deactivate(); break;
+	case RIGHT2:stage.worms[1].move(RIGHT); break; //if (stage.worms[1].animationEnded())stage.worms[1].move(RIGHT); else this->events[1].deactivate(); break;
+	case JUMP1:stage.worms[0].jump(); break; //if (stage.worms[0].animationEnded())stage.worms[0].jump(); else this->events[0].deactivate(); break;
+	case JUMP2:stage.worms[1].jump(); break; //if (stage.worms[1].animationEnded())stage.worms[1].jump(); else this->events[1].deactivate(); break;
+//	case NOEVENT: if (stage.worms[0].animationEnded() && this->events[0].Event == NOEVENT)this->events[0].deactivate(); 
+//		if (stage.worms[1].animationEnded() && this->events[1].Event == NOEVENT)this->events[1].deactivate(); break;
 	case TIMER:
 		stage.draw();
 		for (Worm& worm : stage.worms)
@@ -87,28 +87,65 @@ bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 			quit = true;
 		else
 		{
+			cout << "Tecla de entrada:" << ev.keyboard.keycode << endl;
 			for (int i = 0; i < 2; ++i)
-			{
-				cout << "evento N:" << i << " es" << this->events[i].active << "Time es:"<< this->events[i].time << endl;
-				if (!this->events[i].active && moveWorm(ev.keyboard.keycode,i) && this->events[i].time == NULL)
+			{				
+				if (!this->events[i].active && moveWorm(ev.keyboard.keycode, i) && this->events[i].time == NULL)
+				{
 					setEvent(trasformAllegroEvents(ev.keyboard.keycode), i);
+					this->events[i].keycode = ev.keyboard.keycode;
+				}
+					
+				cout << "evento N:" << i << ".\tTime es:" << this->events[i].time << endl;
 			}
 		}
 		break;
 	case ALLEGRO_EVENT_KEY_UP:
-		cout << "Tecla:" << ev.keyboard.keycode << endl;
+		cout << "Tecla de Salida:" << ev.keyboard.keycode << endl;
+		if (this->events[0].time != NULL)
+		{
+			if (this->events[0].keycode == ev.keyboard.keycode)
+			{
+				cout << "evento N:" << 0 << ".\tTime es:" << this->events[0].time << endl;
+				this->events[0].time->stop();
+				if (this->events[0].time->getTime() >= 100)
+					this->events[0].activate();
+				delete this->events[0].time;
+				this->events[0].time = NULL;
+				cout << "Timer " << 0 << "destroyed" << endl;
+			}
+		}
+		if (this->events[1].time != NULL)
+		{
+			if (this->events[1].keycode == ev.keyboard.keycode)
+			{
+				cout << "evento N:" << 1 << ".\tTime es:" << this->events[1].time << endl;
+				this->events[1].time->stop();
+				if (this->events[1].time->getTime() >= 100)
+					this->events[1].activate();
+				delete this->events[1].time;
+				this->events[1].time = NULL;
+				cout << "Timer " << 1 << "destroyed" << endl;
+			}
+		}
 
-		for (int i = 0; i < 2; ++i)
+		/*for (int i = 0; i < 2; ++i)
 		{
 			if (this->events[i].time != NULL)
 			{
-				this->events[i].time->stop();
-				if ( this->events[i].time->getTime() >= 100)
-					this->events[i].activate();
-				delete this->events[i].time;
-				this->events[i].time = NULL;
+				if (this->events[i].keycode == ev.keyboard.keycode )
+				{
+					cout << "evento N:" << i << ".\tTime es:" << this->events[i].time << endl;
+					this->events[i].time->stop();
+					if (this->events[i].time->getTime() >= 100)
+						this->events[i].activate();
+					delete this->events[i].time;
+					this->events[i].time = NULL;
+					cout << "Timer " << i << "destroyed" << endl;
+				}
+				
 			}
-		}
+		}*/
 		break;
 	case ALLEGRO_EVENT_TIMER:
 		this->setEvent(TIMER, 2);
@@ -144,9 +181,12 @@ void EventHandler::handleEventDispatcher(Stage& stage)
 	{
 		for (int i =0 ; i <2 ; i++)
 		{
-			dispatchEvent(this->events[i].Event, stage);
-
-			//worm.deactivate();
+			if (this->events[i].active)
+			{
+				dispatchEvent(this->events[i].Event, stage);
+				this->events[i].deactivate();
+			}
+				
 		}
 	}
 }
