@@ -25,13 +25,12 @@ int main() {
 	allegro.load_music( "master_race.wav");
 	allegro.play_music();
 	
-	Evnt ev;
-
+	
 	while (eventHandler.getEvent(allegro.getEventQueue()))
 	{
-		if (ev != NOEVENT)
+		if (eventHandler.isThereEvent())
 		{
-			eventHandler.dispatchEvent(ev, stage);
+			eventHandler.handleEventDispatcher(stage);
 			allegro.updateDisplay();
 		}
 

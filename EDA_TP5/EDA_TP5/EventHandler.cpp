@@ -7,7 +7,7 @@ using namespace std;
 Evnt trasformAllegroEvents(int key);
 
 
-void dispatchEvent(Evnt ev, Stage& stage)
+void EventHandler::dispatchEvent(Evnt ev, Stage& stage)
 {
 	switch (ev)
 	{
@@ -59,44 +59,117 @@ Evnt trasformAllegroEvents(int key)
 	return ev;
 }
 
-Evnt getEvent(ALLEGRO_EVENT_QUEUE * eq)
+EventHandler::EventHandler()
+{
+	for (Ev_t& ev : events)
+	{
+		ev.deactivate();
+		ev.time = NULL;
+	}
+}
+
+bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 {
 	ALLEGRO_EVENT ev;
-	Evnt retEv = NOEVENT;
-	static Timer * time = NULL;		// Ya se que no deberiamos usar 'static' pero necesito que este objeto no se destruya al terminar
-									// la funcion ya que es el encargado de regular el tiempo. Creo este objeto solo cuando se detecta 
-									// que se toco una tecla y lo destruyo cuando dejan de apretarla.
+	bool quit = false;
+
 	al_get_next_event(eq, &ev);
 
 
 	switch (ev.type)
 	{
 	case ALLEGRO_EVENT_KEY_DOWN:
-		if (time == NULL)
+		if (ev.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+			quit = true;
+		else
 		{
-			time = new Timer();
-			time->start();
+			for (int i = 0; i < 2; ++i)
+			{
+				if (!this->events[i].active && moveWorm(ev.keyboard.keycode,i) && this->events[i].time == NULL)
+					setEvent(trasformAllegroEvents(ev.keyboard.keycode), i);
+			}
 		}
 		break;
 	case ALLEGRO_EVENT_KEY_UP:
-		if (time != NULL)
+
+		for (int i = 0; i < 2; ++i)
 		{
-			time->stop();
-			if (time->getTime() >= 100)
-				retEv = trasformAllegroEvents(ev.keyboard.keycode);
-			delete time;
-			time = NULL;
+			if (this->events[i].time != NULL && this->events[i].Event == trasformAllegroEvents(ev.keyboard.keycode))
+			{
+				this->events[i].time->stop();
+				if ( this->events[i].time->getTime() >= 100)
+					this->events[i].activate();
+				delete this->events[i].time;
+				this->events[i].time = NULL;
+			}
 		}
 		break;
 	case ALLEGRO_EVENT_TIMER:
-		retEv = TIMER;
+		this->setEvent(TIMER, 2);
+		this->events[2].activate();
 		break;
 	case ALLEGRO_EVENT_DISPLAY_CLOSE:
-		retEv = QUIT;
+		quit = true;
 		break;
 	}
 
+	if (quit)
+		for (int i = 0; i < 2; i++)
+			if (this->events[i].time)
+				delete this->events[i].time;
+	
+	return !quit;
 
-	return retEv;
+}
 
+bool EventHandler::isThereEvent()
+{
+	return this->events[0].active || this->events[1].active || this->events[2].active;
+}
+
+void EventHandler::handleEventDispatcher(Stage& stage)
+{
+	if (this->events[2].active)
+	{
+		dispatchEvent(TIMER, stage);
+		this->events[2].deactivate();
+	}
+	else {
+		for (Ev_t& worm : events)
+		{
+			dispatchEvent(worm.Event, stage);
+			worm.deactivate();
+		}
+	}
+}
+
+void EventHandler::setEvent(Evnt ev, int worm)
+{
+	this->events[worm].Event = ev;
+	if (ev != TIMER)
+		this->events[worm].time = new Timer();
+}
+
+bool EventHandler::moveWorm(int ev, int worm)
+{
+	bool retValue = false;
+
+	switch (worm)
+	{
+	case 0: retValue = moveWorm1(ev);
+		break;
+	case 1: retValue = moveWorm2(ev);
+		break;
+	}
+	return retValue;
+}
+
+bool EventHandler::moveWorm1(int ev)
+{
+	return ((ev == ALLEGRO_KEY_LEFT) || (ev == ALLEGRO_KEY_RIGHT) || (ev == ALLEGRO_KEY_UP));
+}
+
+bool EventHandler::moveWorm2(int ev)
+{
+	return ((ev == ALLEGRO_KEY_W) || (ev == ALLEGRO_KEY_A) || (ev == ALLEGRO_KEY_D));
 }

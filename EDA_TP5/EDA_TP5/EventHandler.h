@@ -21,23 +21,25 @@ typedef struct {
 	}
 	void deactivate() {
 		active = false;
+		Event = NOEVENT;
 	}
 }Ev_t;
 
 class EventHandler {
 public:
+	EventHandler();
 	
 	bool getEvent(ALLEGRO_EVENT_QUEUE *  eq);
 	bool isThereEvent();
-	void handleEventDispatcher();
+	void handleEventDispatcher(Stage& stage);
 private:
-	void setEvent1(Evnt ev);
-	void setEvent2(Evnt ev);
-	void dispatchEvent(Evnt ev, Stage& stage);
-	Evnt trasformAllegroEvents(int key);
-	bool moveWorms1(int ev);
-	bool moveWorms2(int ev);
 
-	array<Ev_t, 2>events;
+	void setEvent(Evnt ev, int worm);
+	void dispatchEvent(Evnt ev, Stage& stage);
+	bool moveWorm(int ev, int worm);
+	bool moveWorm1(int ev);
+	bool moveWorm2(int ev);
+
+	array<Ev_t, 3>events;
 };
 
