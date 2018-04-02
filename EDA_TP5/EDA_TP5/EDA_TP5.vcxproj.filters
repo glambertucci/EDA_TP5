@@ -59,6 +59,15 @@
     <Filter Include="Resource files">
       <UniqueIdentifier>{2d556544-1eaa-4ea8-a823-0504dbf0da9d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource files\Walk">
+      <UniqueIdentifier>{0186a2c2-a89b-4a0b-a175-2483049bc7ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource files\jump">
+      <UniqueIdentifier>{2868ead5-c121-4b13-abfe-4e5685a2772f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource files\Music">
+      <UniqueIdentifier>{6434a052-85ef-4b2a-ba74-38b504d1a161}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="background.png">
@@ -67,80 +76,91 @@
     <Image Include="Scenario.png">
       <Filter>Resource files</Filter>
     </Image>
-    <Image Include="wjump-F1.png">
+    <Image Include="icon.ico">
+      <Filter>Resource files</Filter>
+    </Image>
+    <Image Include="icon.png">
       <Filter>Resource files</Filter>
     </Image>
     <Image Include="wjump-F2.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\jump</Filter>
     </Image>
     <Image Include="wjump-F3.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\jump</Filter>
     </Image>
     <Image Include="wjump-F4.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\jump</Filter>
     </Image>
     <Image Include="wjump-F5.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\jump</Filter>
     </Image>
     <Image Include="wjump-F6.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\jump</Filter>
     </Image>
     <Image Include="wjump-F7.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\jump</Filter>
     </Image>
     <Image Include="wjump-F8.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\jump</Filter>
     </Image>
     <Image Include="wjump-F9.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\jump</Filter>
     </Image>
     <Image Include="wjump-F10.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\jump</Filter>
+    </Image>
+    <Image Include="wjump-F1.png">
+      <Filter>Resource files\jump</Filter>
     </Image>
     <Image Include="wwalk-F1.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\Walk</Filter>
     </Image>
     <Image Include="wwalk-F2.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\Walk</Filter>
     </Image>
     <Image Include="wwalk-F3.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\Walk</Filter>
     </Image>
     <Image Include="wwalk-F4.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\Walk</Filter>
     </Image>
     <Image Include="wwalk-F5.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\Walk</Filter>
     </Image>
     <Image Include="wwalk-F6.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\Walk</Filter>
     </Image>
     <Image Include="wwalk-F7.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\Walk</Filter>
     </Image>
     <Image Include="wwalk-F8.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\Walk</Filter>
     </Image>
     <Image Include="wwalk-F9.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\Walk</Filter>
     </Image>
     <Image Include="wwalk-F10.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\Walk</Filter>
     </Image>
     <Image Include="wwalk-F11.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\Walk</Filter>
     </Image>
     <Image Include="wwalk-F12.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\Walk</Filter>
     </Image>
     <Image Include="wwalk-F13.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\Walk</Filter>
     </Image>
     <Image Include="wwalk-F14.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\Walk</Filter>
     </Image>
     <Image Include="wwalk-F15.png">
-      <Filter>Resource files</Filter>
+      <Filter>Resource files\Walk</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="master_race.wav">
+      <Filter>Resource files\Music</Filter>
+    </Media>
   </ItemGroup>
 </Project>

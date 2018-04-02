@@ -27,7 +27,7 @@ allegro_c::allegro_c()
 											al_register_event_source(this->ev_queue, al_get_keyboard_event_source());
 											al_register_event_source(this->ev_queue, al_get_display_event_source(this->display));
 											al_register_event_source(this->ev_queue, al_get_timer_event_source(this->timer));
-											al_set_window_title(display,"Master race arena");
+											al_set_window_title(display,"Master Race Arena");
 											al_start_timer(this->timer);
 											ALLEGRO_BITMAP * icon=al_load_bitmap("icon.png");
 											al_set_display_icon(display, icon);

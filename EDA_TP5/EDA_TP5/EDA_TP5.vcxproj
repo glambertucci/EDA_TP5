@@ -159,6 +159,8 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="background.png" />
+    <Image Include="icon.ico" />
+    <Image Include="icon.png" />
     <Image Include="Scenario.png" />
     <Image Include="wjump-F1.png" />
     <Image Include="wjump-F10.png" />
@@ -185,6 +187,9 @@
     <Image Include="wwalk-F7.png" />
     <Image Include="wwalk-F8.png" />
     <Image Include="wwalk-F9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="master_race.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
