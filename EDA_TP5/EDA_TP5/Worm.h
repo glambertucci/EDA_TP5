@@ -24,8 +24,6 @@ public:
 	void move(Direction a); 
 	void jump();
 
-	bool animationEnded();
-
 	void draw();
 	void update();
 private:
@@ -43,5 +41,7 @@ private:
 	const float gravity = 0.24;
 	const float degrees60 = ALLEGRO_PI / 3.0;
 	const float speed = 4.5;
+	const float pixelsPerCycle = 9;
+	const int RepeatedFramesPerCycle = 14;
 };
 

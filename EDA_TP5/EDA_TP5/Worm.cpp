@@ -39,27 +39,12 @@ void Worm::jump()
 	}
 }
 
-bool Worm::animationEnded()
-{
-	bool retValue = false;
-
-	//if (this->state == MOVE && this->ticks >= WALKTICKS)
-		//retValue = true;
-	//else if (this->state == JUMP && this->ticks >= JUMPTICKS)
-		//retValue = true;
-
-	if (this->ticks == 0 && this->state == STILL)
-		retValue = true;
-
-	return retValue;
-}
-
 void Worm::doMove()
 {
 	this->ticks++;
-	if (!(abs(this->ticks - 3) % 14))
+	if (!(abs(this->ticks - 3) % this->RepeatedFramesPerCycle))
 		if (this->isXValid())
-			this->coord.x += this->direction * 9;
+			this->coord.x += this->direction * this->pixelsPerCycle;
 }
 
 void Worm::doJump()
