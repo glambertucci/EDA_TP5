@@ -43,12 +43,12 @@ bool Worm::animationEnded()
 {
 	bool retValue = false;
 
-	if (this->state == MOVE && this->ticks >= WALKTICKS)
-		retValue = true;
-	else if (this->state == JUMP && this->ticks >= JUMPTICKS)
-		retValue = true;
+	//if (this->state == MOVE && this->ticks >= WALKTICKS)
+		//retValue = true;
+	//else if (this->state == JUMP && this->ticks >= JUMPTICKS)
+		//retValue = true;
 
-	if (this->ticks == 0)
+	if (this->ticks == 0 && this->state == STILL)
 		retValue = true;
 
 	return retValue;

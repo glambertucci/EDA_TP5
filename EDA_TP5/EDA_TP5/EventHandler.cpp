@@ -1,7 +1,7 @@
 #include <ctype.h>
 #include <vector>
 #include "EventHandler.h"
-
+#include <iostream>
 
 using namespace std;
 Evnt trasformAllegroEvents(int key);
@@ -17,7 +17,8 @@ void EventHandler::dispatchEvent(Evnt ev, Stage& stage)
 	case RIGHT2:if (stage.worms[1].animationEnded())stage.worms[1].move(RIGHT); else this->events[1].deactivate(); break;
 	case JUMP1:if (stage.worms[0].animationEnded())stage.worms[0].jump(); else this->events[0].deactivate(); break;
 	case JUMP2:if (stage.worms[1].animationEnded())stage.worms[1].jump(); else this->events[1].deactivate(); break;
-	case NOEVENT: if (stage.worms[0].animationEnded())this->events[0].deactivate(); if (stage.worms[1].animationEnded())this->events[1].deactivate(); break;
+	case NOEVENT: if (stage.worms[0].animationEnded() && this->events[0].Event == NOEVENT)this->events[0].deactivate(); 
+		if (stage.worms[1].animationEnded() && this->events[1].Event == NOEVENT)this->events[1].deactivate(); break;
 	case TIMER:
 		stage.draw();
 		for (Worm& worm : stage.worms)
@@ -69,6 +70,8 @@ EventHandler::EventHandler()
 	}
 }
 
+using namespace std;
+
 bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 {
 	ALLEGRO_EVENT ev;
@@ -86,16 +89,18 @@ bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 		{
 			for (int i = 0; i < 2; ++i)
 			{
+				cout << "evento N:" << i << " es" << this->events[i].active << "Time es:"<< this->events[i].time << endl;
 				if (!this->events[i].active && moveWorm(ev.keyboard.keycode,i) && this->events[i].time == NULL)
 					setEvent(trasformAllegroEvents(ev.keyboard.keycode), i);
 			}
 		}
 		break;
 	case ALLEGRO_EVENT_KEY_UP:
+		cout << "Tecla:" << ev.keyboard.keycode << endl;
 
 		for (int i = 0; i < 2; ++i)
 		{
-			if (this->events[i].time != NULL && this->events[i].Event == trasformAllegroEvents(ev.keyboard.keycode))
+			if (this->events[i].time != NULL)
 			{
 				this->events[i].time->stop();
 				if ( this->events[i].time->getTime() >= 100)
