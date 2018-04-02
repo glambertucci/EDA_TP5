@@ -1,49 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Timer.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="Worm.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="allegroClass.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="init_arr.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="Stage.cpp">
-      <Filter>Source files</Filter>
+    <ClCompile Include="allegroClass.cpp">
+      <Filter>Source files\Classes</Filter>
     </ClCompile>
     <ClCompile Include="EventHandler.cpp">
-      <Filter>Source files</Filter>
+      <Filter>Source files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>Source files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Worm.cpp">
+      <Filter>Source files\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source files\Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="allegroClass.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
     <ClInclude Include="bitinit.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="Worm.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="EventHandler.h">
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="init_arr.h">
       <Filter>Header files</Filter>
     </ClInclude>
+    <ClInclude Include="allegroClass.h">
+      <Filter>Header files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="EventHandler.h">
+      <Filter>Header files\Classes</Filter>
+    </ClInclude>
     <ClInclude Include="Stage.h">
-      <Filter>Header files</Filter>
+      <Filter>Header files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Worm.h">
+      <Filter>Header files\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header files\Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +67,12 @@
     </Filter>
     <Filter Include="Resource files\Music">
       <UniqueIdentifier>{6434a052-85ef-4b2a-ba74-38b504d1a161}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Classes">
+      <UniqueIdentifier>{994fa52b-7c28-472b-81b7-e2b3354f8034}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Classes">
+      <UniqueIdentifier>{9e6356e0-bc28-4dcd-bc7e-433515b54496}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
