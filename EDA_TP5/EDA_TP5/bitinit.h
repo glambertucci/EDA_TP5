@@ -13,6 +13,12 @@ using namespace std;
 #define JUMPTICKS 43
 #define WALKPICS 15
 #define JUMPPICS 10
+
+// Elegimos cargar los bitmaps de la forma en la que se iran mostrando para evitar complicar la funcion draw().
+//
+// Creamos estas funciones de forma que no se cargan mas imagenes de las necesarias, solo se cargan las imagenes y se copian los
+// punteros a otras posiciones. Al terminar se debe llamar a unload() para eliminar correctamente los bitmaps y evitar memory leaks
+//
 typedef struct
 {
 
@@ -20,8 +26,8 @@ typedef struct
 	const float minX = 701.0;
 	const float minY = 616.0;
 	const float maxY = (616 - 33.0);
-	array<ALLEGRO_BITMAP *, WALKTICKS> walk;
-	array<ALLEGRO_BITMAP *, JUMPTICKS> jump;
+	array<ALLEGRO_BITMAP *, WALKTICKS> walk;	// Decidimos usar array ya que no hay que pasar el tama;o del arreglo como un parametro extra
+	array<ALLEGRO_BITMAP *, JUMPTICKS> jump;	// y por que te avisa cuando te estas pasando de la cantidad maxima de elementos.
 
 	void load( array< char [14], WALKPICS>& walkAnimation, array< char[14], 10>& jumpAnimation)  //Loading the animations
 	{
