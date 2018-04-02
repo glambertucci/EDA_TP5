@@ -39,6 +39,21 @@ void Worm::jump()
 	}
 }
 
+bool Worm::animationEnded()
+{
+	bool retValue = false;
+
+	if (this->state == MOVE && this->ticks >= WALKTICKS)
+		retValue = true;
+	else if (this->state == JUMP && this->ticks >= JUMPTICKS)
+		retValue = true;
+
+	if (this->ticks == 0)
+		retValue = true;
+
+	return retValue;
+}
+
 void Worm::doMove()
 {
 	this->ticks++;

@@ -24,6 +24,8 @@ public:
 	void move(Direction a); 
 	void jump();
 
+	bool animationEnded();
+
 	void draw();
 	void update();
 private:

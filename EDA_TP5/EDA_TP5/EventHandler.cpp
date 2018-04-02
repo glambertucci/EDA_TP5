@@ -11,12 +11,13 @@ void EventHandler::dispatchEvent(Evnt ev, Stage& stage)
 {
 	switch (ev)
 	{
-	case LEFT1: stage.worms[0].move(LEFT); break;
-	case LEFT2: stage.worms[1].move(LEFT); break;
-	case RIGHT1:stage.worms[0].move(RIGHT); break;
-	case RIGHT2:stage.worms[1].move(RIGHT); break;
-	case JUMP1:stage.worms[0].jump(); break;
-	case JUMP2:stage.worms[1].jump(); break;
+	case LEFT1: if (stage.worms[0].animationEnded())stage.worms[0].move(LEFT); else this->events[0].deactivate(); break;
+	case LEFT2: if (stage.worms[1].animationEnded())stage.worms[1].move(LEFT); else this->events[1].deactivate(); break;
+	case RIGHT1:if (stage.worms[0].animationEnded())stage.worms[0].move(RIGHT); else this->events[0].deactivate(); break;
+	case RIGHT2:if (stage.worms[1].animationEnded())stage.worms[1].move(RIGHT); else this->events[1].deactivate(); break;
+	case JUMP1:if (stage.worms[0].animationEnded())stage.worms[0].jump(); else this->events[0].deactivate(); break;
+	case JUMP2:if (stage.worms[1].animationEnded())stage.worms[1].jump(); else this->events[1].deactivate(); break;
+	case NOEVENT: if (stage.worms[0].animationEnded())this->events[0].deactivate(); if (stage.worms[1].animationEnded())this->events[1].deactivate(); break;
 	case TIMER:
 		stage.draw();
 		for (Worm& worm : stage.worms)
@@ -134,11 +135,13 @@ void EventHandler::handleEventDispatcher(Stage& stage)
 		dispatchEvent(TIMER, stage);
 		this->events[2].deactivate();
 	}
-	else {
-		for (Ev_t& worm : events)
+	else 
+	{
+		for (int i =0 ; i <2 ; i++)
 		{
-			dispatchEvent(worm.Event, stage);
-			worm.deactivate();
+			dispatchEvent(this->events[i].Event, stage);
+
+			//worm.deactivate();
 		}
 	}
 }
