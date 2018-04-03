@@ -11,12 +11,12 @@ void EventHandler::dispatchEvent(Evnt ev, Stage& stage)
 {
 	switch (ev)
 	{
-	case LEFT1: stage.worms[0].move(LEFT); break; 
-	case LEFT2: stage.worms[1].move(LEFT); break; 
-	case RIGHT1:stage.worms[0].move(RIGHT); break;
-	case RIGHT2:stage.worms[1].move(RIGHT); break;
-	case JUMP1:stage.worms[0].jump(); break;
-	case JUMP2:stage.worms[1].jump(); break;
+	case LEFT1: if (stage.worms[0].state == STILL) stage.worms[0].move(LEFT); break;
+	case LEFT2:if (stage.worms[1].state == STILL) stage.worms[1].move(LEFT); break;
+	case RIGHT1:if (stage.worms[0].state == STILL)stage.worms[0].move(RIGHT); break;
+	case RIGHT2:if (stage.worms[1].state == STILL)stage.worms[1].move(RIGHT); break;
+	case JUMP1:if (stage.worms[0].state == STILL)stage.worms[0].jump(); break;
+	case JUMP2:if (stage.worms[1].state == STILL)stage.worms[1].jump(); break;
 	case TIMER:
 		stage.draw();
 		for (Worm& worm : stage.worms)
@@ -88,14 +88,20 @@ bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 			for (int i = 0; i < 2; ++i)			
 				if (!this->events[i].active && moveWorm(ev.keyboard.keycode, i) && !this->events[i].timerExist())
 					setEvent(trasformAllegroEvents(ev.keyboard.keycode), i);
+		
+
 			
 		break;
 	case ALLEGRO_EVENT_KEY_UP:
 
 		for (int i = 0; i < 2; ++i)
-			if (this->events[i].timerExist() && this->events[i].Event == trasformAllegroEvents(ev.keyboard.keycode))
-				if (this->events[i].timerGreaterThan(100))
-					this->events[i].activate();
+			if (this->events[i].timerExist())// && this->events[i].Event == trasformAllegroEvents(ev.keyboard.keycode))
+				this->events[i].killTimer();
+				//if (this->events[i].timerGreaterThan(100))
+				{
+				//	this->events[i].activate();
+				}
+					
 		break;
 	case ALLEGRO_EVENT_TIMER:
 		this->setEvent(TIMER, 2);
@@ -108,11 +114,14 @@ bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 				this->events[i].time->stop();
 				if (this->events[i].time->getTime() >= 100)
 				{
-					this->events[i].killTimer();
 					this->events[i].activate();
+					this->events[i].time->start();
+
 				}
+					
 			}
 		}
+
 
 		
 		break;
@@ -137,13 +146,6 @@ bool EventHandler::isThereEvent()
 
 void EventHandler::handleEventDispatcher(Stage& stage)
 {
-	//if (this->events[2].active)
-	{
-	//	dispatchEvent(this->events[2].Event, stage);
-		//this->events[2].deactivate();
-	}
-//	else 
-	{
 		for (int i =0 ; i <3 ; i++)
 		{
 			if (this->events[i].active)
@@ -151,14 +153,14 @@ void EventHandler::handleEventDispatcher(Stage& stage)
 				dispatchEvent(this->events[i].Event, stage);
 				this->events[i].deactivate();
 			}
-				
 		}
-	}
 }
 
 void EventHandler::setEvent(Evnt ev, int worm)
 {
+	this->events[worm].lastEv = this->events[worm].Event;
 	this->events[worm].Event = ev;
+
 	if (ev != TIMER)
 		this->events[worm].newTimer();
 }

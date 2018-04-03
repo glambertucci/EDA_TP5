@@ -23,7 +23,7 @@ public:
 
 	void move(Direction a); 
 	void jump();
-
+	State state;
 	void draw();
 	void update();
 private:
@@ -34,7 +34,7 @@ private:
 	Direction direction;
 	Point coord;
 	State prev_state;
-	State state;
+	
 	int ticks;
 	info * data;
 

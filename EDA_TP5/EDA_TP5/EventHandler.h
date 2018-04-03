@@ -13,16 +13,21 @@ typedef enum Evnt {
 
 typedef struct {
 	Evnt Event;
+	Evnt lastEv;
 	Timer * time;
 	bool active;
 	int keycode;
 
 	void activate() {
+		if (Event == NOEVENT)// && lastEv != NOEVENT)
+			Event == lastEv;
 		active = true;
 	}
 	void deactivate() {
 		active = false;
+		lastEv = Event;
 		Event = NOEVENT;
+		
 	}
 	void newTimer() {
 		time = new Timer();
