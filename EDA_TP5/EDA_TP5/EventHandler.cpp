@@ -88,27 +88,21 @@ bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 			for (int i = 0; i < 2; ++i)			
 				if (!this->events[i].active && moveWorm(ev.keyboard.keycode, i) && !this->events[i].timerExist())
 					setEvent(trasformAllegroEvents(ev.keyboard.keycode), i);
-		
 
-			
 		break;
 	case ALLEGRO_EVENT_KEY_UP:
 
 		for (int i = 0; i < 2; ++i)
-			if (this->events[i].timerExist())// && this->events[i].Event == trasformAllegroEvents(ev.keyboard.keycode))
+			if (this->events[i].timerExist() && this->events[i].Event == trasformAllegroEvents(ev.keyboard.keycode))
 				this->events[i].killTimer();
-				//if (this->events[i].timerGreaterThan(100))
-				{
-				//	this->events[i].activate();
-				}
 					
 		break;
 	case ALLEGRO_EVENT_TIMER:
 		this->setEvent(TIMER, 2);
 		this->events[2].activate();
 
+
 		for (int i = 0; i < 2; ++i)
-		{
 			if (!this->events[i].active && this->events[i].timerExist())
 			{
 				this->events[i].time->stop();
@@ -116,12 +110,8 @@ bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 				{
 					this->events[i].activate();
 					this->events[i].time->start();
-
 				}
-					
 			}
-		}
-
 
 		
 		break;
@@ -158,7 +148,7 @@ void EventHandler::handleEventDispatcher(Stage& stage)
 
 void EventHandler::setEvent(Evnt ev, int worm)
 {
-	this->events[worm].lastEv = this->events[worm].Event;
+
 	this->events[worm].Event = ev;
 
 	if (ev != TIMER)

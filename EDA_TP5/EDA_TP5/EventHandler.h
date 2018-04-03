@@ -19,14 +19,13 @@ typedef struct {
 	int keycode;
 
 	void activate() {
-		if (Event == NOEVENT)// && lastEv != NOEVENT)
+		if (Event == NOEVENT)
 			Event == lastEv;
 		active = true;
 	}
 	void deactivate() {
 		active = false;
 		lastEv = Event;
-		Event = NOEVENT;
 		
 	}
 	void newTimer() {
