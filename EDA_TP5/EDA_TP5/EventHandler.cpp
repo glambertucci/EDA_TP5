@@ -88,6 +88,7 @@ bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 			for (int i = 0; i < 2; ++i)			
 				if (!this->events[i].active && moveWorm(ev.keyboard.keycode, i) && !this->events[i].timerExist())
 					setEvent(trasformAllegroEvents(ev.keyboard.keycode), i);
+			
 		break;
 	case ALLEGRO_EVENT_KEY_UP:
 
@@ -99,6 +100,21 @@ bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 	case ALLEGRO_EVENT_TIMER:
 		this->setEvent(TIMER, 2);
 		this->events[2].activate();
+
+		for (int i = 0; i < 2; ++i)
+		{
+			if (!this->events[i].active && this->events[i].timerExist())
+			{
+				this->events[i].time->stop();
+				if (this->events[i].time->getTime() >= 100)
+				{
+					this->events[i].killTimer();
+					this->events[i].activate();
+				}
+			}
+		}
+
+		
 		break;
 	case ALLEGRO_EVENT_DISPLAY_CLOSE:
 		quit = true;
@@ -121,14 +137,14 @@ bool EventHandler::isThereEvent()
 
 void EventHandler::handleEventDispatcher(Stage& stage)
 {
-	if (this->events[2].active)
+	//if (this->events[2].active)
 	{
-		dispatchEvent(this->events[2].Event, stage);
-		this->events[2].deactivate();
+	//	dispatchEvent(this->events[2].Event, stage);
+		//this->events[2].deactivate();
 	}
-	else 
+//	else 
 	{
-		for (int i =0 ; i <2 ; i++)
+		for (int i =0 ; i <3 ; i++)
 		{
 			if (this->events[i].active)
 			{
