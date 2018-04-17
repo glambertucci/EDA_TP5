@@ -17,6 +17,8 @@ void EventHandler::dispatchEvent(Evnt ev, Stage& stage)
 	case RIGHT2:if (stage.worms[1].state == STILL)stage.worms[1].move(RIGHT); break;
 	case JUMP1:if (stage.worms[0].state == STILL)stage.worms[0].jump(); break;
 	case JUMP2:if (stage.worms[1].state == STILL)stage.worms[1].jump(); break;
+	case FLIP1: if (stage.worms[0].state == STILL) stage.worms[0].flip(); break;
+	case FLIP2: if (stage.worms[0].state == STILL) stage.worms[1].flip(); break;
 	case TIMER:
 		stage.draw();
 		for (Worm& worm : stage.worms)
@@ -106,10 +108,23 @@ bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 			if (!this->events[i].active && this->events[i].timerExist())
 			{
 				this->events[i].time->stop();
-				if (this->events[i].time->getTime() >= 100)
+				float time_ = this->events[i].time->getTime();
+				if ( time_ >= 100)
 				{
 					this->events[i].activate();
 					this->events[i].time->start();
+				}
+				else if (time_ < 100)
+				{
+					cout << "antes del cancer " << endl;
+					bool a = moveWorm(ev.keyboard.keycode,i);
+					cout << "despues del cancer" << endl;
+					if (a)
+					{
+						this->events[i].Event = (i == 0 ? FLIP1 : FLIP2);
+						this->events[i].activate();
+						this->events[i].time->start();
+					}
 				}
 			}
 

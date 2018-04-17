@@ -39,6 +39,11 @@ void Worm::jump()
 	}
 }
 
+void Worm::flip()
+{
+	this->direction = (this->direction == LEFT ? LEFT : RIGHT) ;
+}
+
 void Worm::doMove()
 {
 	this->ticks++;

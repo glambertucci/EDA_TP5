@@ -47,9 +47,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Source files">
       <UniqueIdentifier>{4ff9b8be-4461-4f8a-99ff-48a380bc1fb5}</UniqueIdentifier>
     </Filter>
@@ -168,5 +165,8 @@
     <Media Include="master_race.wav">
       <Filter>Resource files\Music</Filter>
     </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

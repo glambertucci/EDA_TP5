@@ -169,9 +169,6 @@
     <ClInclude Include="Worm.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="background.png" />
     <Image Include="icon.ico" />
     <Image Include="icon.png" />
@@ -204,6 +201,9 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="master_race.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

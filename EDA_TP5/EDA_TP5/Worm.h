@@ -23,6 +23,7 @@ public:
 
 	void move(Direction a); 
 	void jump();
+	void flip();
 	State state;
 	void draw();
 	void update();

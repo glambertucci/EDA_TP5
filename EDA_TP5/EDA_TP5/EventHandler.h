@@ -8,7 +8,7 @@ using namespace std;
 
 
 typedef enum Evnt {
-	NOEVENT, LEFT1, LEFT2, RIGHT1, RIGHT2, JUMP1, JUMP2, TIMER, QUIT
+	NOEVENT, LEFT1, LEFT2, RIGHT1, RIGHT2, JUMP1, JUMP2, TIMER, QUIT, FLIP1, FLIP2
 };
 
 typedef struct {
