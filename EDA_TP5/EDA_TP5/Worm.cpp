@@ -39,9 +39,13 @@ void Worm::jump()
 	}
 }
 
-void Worm::flip()
+void Worm::flipLeft()
 {
-	this->direction = (this->direction == LEFT ? LEFT : RIGHT) ;
+	this->direction = (this->direction == LEFT ? LEFT : LEFT) ;
+}
+
+void Worm::flipRight() {
+	this->direction = (this->direction == RIGHT ? RIGHT : RIGHT);
 }
 
 void Worm::doMove()

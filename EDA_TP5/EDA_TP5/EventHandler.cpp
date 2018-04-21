@@ -7,19 +7,16 @@ using namespace std;
 Evnt trasformAllegroEvents(int key);
 
 
-void EventHandler::dispatchEvent(Evnt ev, Stage& stage)
+void EventHandler::dispatchEvent(Evnt ev, Stage& stage, int wormID = 0)
 {
 	switch (ev)
 	{
-	case LEFT1: if (stage.worms[0].state == STILL) stage.worms[0].move(LEFT); break;
-	case LEFT2:if (stage.worms[1].state == STILL) stage.worms[1].move(LEFT); break;
-	case RIGHT1:if (stage.worms[0].state == STILL)stage.worms[0].move(RIGHT); break;
-	case RIGHT2:if (stage.worms[1].state == STILL)stage.worms[1].move(RIGHT); break;
-	case JUMP1:if (stage.worms[0].state == STILL)stage.worms[0].jump(); break;
-	case JUMP2:if (stage.worms[1].state == STILL)stage.worms[1].jump(); break;
-	case FLIP1: if (stage.worms[0].state == STILL) stage.worms[0].flip(); break;
-	case FLIP2: if (stage.worms[0].state == STILL) stage.worms[1].flip(); break;
-	case TIMER:
+	case LEFT_EV: if (stage.worms[wormID].state == STILL) stage.worms[wormID].move(LEFT); break;
+	case RIGHT_EV:if (stage.worms[wormID].state == STILL)stage.worms[wormID].move(RIGHT); break;
+	case JUMP_EV:if (stage.worms[wormID].state == STILL)stage.worms[wormID].jump(); break;
+	case FLIP_LEFT_EV: if (stage.worms[wormID].state == STILL) stage.worms[wormID].flipLeft(); break;
+	case FLIP_RIGHT_EV: if (stage.worms[wormID].state == STILL) stage.worms[wormID].flipRight(); break;
+	case TIMER_EV:
 		stage.draw();
 		for (Worm& worm : stage.worms)
 		{
@@ -36,26 +33,20 @@ Evnt trasformAllegroEvents(int key)
 
 	switch (key)
 	{
-	case ALLEGRO_KEY_A:
-		ev = LEFT2;
-		break;
-	case ALLEGRO_KEY_D:
-		ev = RIGHT2;
-		break;
-	case ALLEGRO_KEY_W:
-		ev = JUMP2;
-		break;
 	case ALLEGRO_KEY_LEFT:
-		ev = LEFT1;
+	case ALLEGRO_KEY_A:
+		ev = LEFT_EV;
 		break;
 	case ALLEGRO_KEY_RIGHT:
-		ev = RIGHT1;
+	case ALLEGRO_KEY_D:
+		ev = RIGHT_EV;
 		break;
 	case ALLEGRO_KEY_UP:
-		ev = JUMP1;
+	case ALLEGRO_KEY_W:
+		ev = JUMP_EV;
 		break;
 	case ALLEGRO_KEY_ESCAPE:
-		ev = QUIT;
+		ev = QUIT_EV;
 		break;
 	}
 	return ev;
@@ -95,12 +86,24 @@ bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 	case ALLEGRO_EVENT_KEY_UP:
 
 		for (int i = 0; i < 2; ++i)
-			if (this->events[i].timerExist() && this->events[i].Event == trasformAllegroEvents(ev.keyboard.keycode))
-				this->events[i].killTimer();
+			if (this->events[i].timerExist() && this->events[i].Event == trasformAllegroEvents(ev.keyboard.keycode)) {
+				if (!this->events[i].timerGreaterThan(100))
+				{
+					if (trasformAllegroEvents(ev.keyboard.keycode) == RIGHT_EV) {
+						this->events[i].Event = FLIP_RIGHT_EV;
+						this->events[i].activate();
+					}
+					else if (trasformAllegroEvents(ev.keyboard.keycode) == LEFT_EV) {
+						this->events[i].Event = FLIP_LEFT_EV;
+						this->events[i].activate();
+					}
+					
+				}
+			}
 					
 		break;
 	case ALLEGRO_EVENT_TIMER:
-		this->setEvent(TIMER, 2);
+		this->setEvent(TIMER_EV, 2);
 		this->events[2].activate();
 
 
@@ -114,19 +117,19 @@ bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 					this->events[i].activate();
 					this->events[i].time->start();
 				}
-				else if (time_ < 100)
-				{
-					cout << "antes del cancer " << endl;
+				else if (time_ < 100)		// Aca hay que ver bien por que da cancer
+				{ 
 					bool a = moveWorm(ev.keyboard.keycode,i);
-					cout << "despues del cancer" << endl;
-					if (a)
+					if (a && !this->events[i].keyPressed)
 					{
-						this->events[i].Event = (i == 0 ? FLIP1 : FLIP2);
-						this->events[i].activate();
-						this->events[i].time->start();
+						//this->events[i].Event = FLIP_EV;
+						//this->events[i].activate();
+						//this->events[i].time->start();
+						//this->events[i].keyPressed = true;
 					}
 				}
 			}
+
 
 		
 		break;
@@ -155,7 +158,7 @@ void EventHandler::handleEventDispatcher(Stage& stage)
 		{
 			if (this->events[i].active)
 			{
-				dispatchEvent(this->events[i].Event, stage);
+				dispatchEvent(this->events[i].Event, stage,i);
 				this->events[i].deactivate();
 			}
 		}
@@ -166,7 +169,7 @@ void EventHandler::setEvent(Evnt ev, int worm)
 
 	this->events[worm].Event = ev;
 
-	if (ev != TIMER)
+	if (ev != TIMER_EV)
 		this->events[worm].newTimer();
 }
 

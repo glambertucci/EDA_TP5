@@ -8,7 +8,7 @@ using namespace std;
 
 
 typedef enum Evnt {
-	NOEVENT, LEFT1, LEFT2, RIGHT1, RIGHT2, JUMP1, JUMP2, TIMER, QUIT, FLIP1, FLIP2
+	NOEVENT, LEFT_EV, RIGHT_EV,  JUMP_EV, TIMER_EV, QUIT_EV, FLIP_LEFT_EV, FLIP_RIGHT_EV
 };
 
 typedef struct {
@@ -17,6 +17,7 @@ typedef struct {
 	Timer * time;
 	bool active;
 	int keycode;
+	bool keyPressed = true;
 
 	void activate() {
 		if (Event == NOEVENT)
@@ -62,7 +63,7 @@ public:
 private:
 
 	void setEvent(Evnt ev, int worm);				// Sets the event but it does not activate it.
-	void dispatchEvent(Evnt ev, Stage& stage);		// The actual dispatcher for every single event
+	void dispatchEvent(Evnt ev, Stage& stage, int wormID);		// The actual dispatcher for every single event
 	bool moveWorm(int ev, int worm);				// It decides if the key pressed correspond to a given worm
 	bool moveWorm1(int ev);
 	bool moveWorm2(int ev);
