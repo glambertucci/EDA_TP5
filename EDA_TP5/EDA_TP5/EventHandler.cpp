@@ -7,26 +7,8 @@ using namespace std;
 Evnt trasformAllegroEvents(int key);
 
 
-void EventHandler::dispatchEvent(Evnt ev, Stage& stage, int wormID = 0)
-{
-	switch (ev)
-	{
-	case LEFT_EV: if (stage.worms[wormID].state == STILL) stage.worms[wormID].move(LEFT); break;
-	case RIGHT_EV:if (stage.worms[wormID].state == STILL)stage.worms[wormID].move(RIGHT); break;
-	case JUMP_EV:if (stage.worms[wormID].state == STILL)stage.worms[wormID].jump(); break;
-	case FLIP_LEFT_EV: if (stage.worms[wormID].state == STILL) stage.worms[wormID].flipLeft(); break;
-	case FLIP_RIGHT_EV: if (stage.worms[wormID].state == STILL) stage.worms[wormID].flipRight(); break;
-	case TIMER_EV:
-		stage.draw();
-		for (Worm& worm : stage.worms)
-		{
-			worm.update();
-			worm.draw();
-		}
-	}
 
-}
-
+// Transforma eventos de allegro en eventos de mi programa
 Evnt trasformAllegroEvents(int key)
 {
 	Evnt ev = NOEVENT;
@@ -61,7 +43,20 @@ EventHandler::EventHandler()
 	}
 }
 
-using namespace std;
+// Explicacion del 'getEvent' :
+
+/*
+Esta funcion permite tomar eventos de allegro de forma simultanea, ya que al presionar una tecla, se setea el evento (pero no se activa, 
+entonces no se ejecuta) y se crea un timer que verifica que pase el tiempo de confirmacion. Cuando llega un evento de timer de allegro,
+si no hay eventos activos, pero hay un timer activo, verifica que pase el tiempo necesario para que se confirme que el usuario no apreto
+la tecla sin querer (100ms en este caso) y se activa el evento correspondiente.
+
+Por ultimo, cuando se suelta la tecla, se verifica si el tiempo del timer es menor a 100ms y se desruye el timer. Si el tiempo es menor, 
+entonces va a flipear hacia donde se le indico. Sino, no hace nada.
+
+*/
+
+
 
 bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 {
@@ -117,17 +112,6 @@ bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 					this->events[i].activate();
 					this->events[i].time->start();
 				}
-				else if (time_ < 100)		// Aca hay que ver bien por que da cancer
-				{ 
-					bool a = moveWorm(ev.keyboard.keycode,i);
-					if (a && !this->events[i].keyPressed)
-					{
-						//this->events[i].Event = FLIP_EV;
-						//this->events[i].activate();
-						//this->events[i].time->start();
-						//this->events[i].keyPressed = true;
-					}
-				}
 			}
 
 
@@ -152,9 +136,12 @@ bool EventHandler::isThereEvent()
 	return this->events[0].active || this->events[1].active || this->events[2].active;
 }
 
+
+// Esta funcion es bastante simple. Yo se que tengo un array de eventos, y que el evento del timer de allegro va ultimo, por lo que paso por todos
+// y, si estan activos, los ejecuto y los desactivo
 void EventHandler::handleEventDispatcher(Stage& stage)
 {
-		for (int i =0 ; i <3 ; i++)
+		for (int i =0 ; i <this->events.size() ; i++)
 		{
 			if (this->events[i].active)
 			{
@@ -162,6 +149,28 @@ void EventHandler::handleEventDispatcher(Stage& stage)
 				this->events[i].deactivate();
 			}
 		}
+}
+
+// Este es el dispatcher, y viene con un wormID integrado, que basicamente es el lugar del worm en el vector
+
+void EventHandler::dispatchEvent(Evnt ev, Stage& stage, int wormID = 0)
+{
+	switch (ev)
+	{
+	case LEFT_EV: if (stage.worms[wormID].state == STILL) stage.worms[wormID].move(LEFT); break;
+	case RIGHT_EV:if (stage.worms[wormID].state == STILL)stage.worms[wormID].move(RIGHT); break;
+	case JUMP_EV:if (stage.worms[wormID].state == STILL)stage.worms[wormID].jump(); break;
+	case FLIP_LEFT_EV: if (stage.worms[wormID].state == STILL) stage.worms[wormID].flipLeft(); break;
+	case FLIP_RIGHT_EV: if (stage.worms[wormID].state == STILL) stage.worms[wormID].flipRight(); break;
+	case TIMER_EV:
+		stage.draw();
+		for (Worm& worm : stage.worms)
+		{
+			worm.update();
+			worm.draw();
+		}
+	}
+
 }
 
 void EventHandler::setEvent(Evnt ev, int worm)

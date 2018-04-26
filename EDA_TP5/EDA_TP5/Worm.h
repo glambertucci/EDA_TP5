@@ -20,13 +20,20 @@ class Worm
 public:
 	Worm(info * data);
 	~Worm();
-
+	// Esta funcion setea el estado de 'MOVE' y la direccion hacia la cual se mueve
 	void move(Direction a); 
+	// Esta funcion setea el estado 'Jump'
 	void jump();
+	// Esta funcion forza al worm a mirar a la izquierda
 	void flipLeft();
+	// Esta funcion forza al worm a mirar a la derecha
 	void flipRight();
+	// Es el estado actual del worm
 	State state;
+	// Dibuja al worm
 	void draw();
+	// Actualiza al worm. Esta funcion va a llamar a doMove y doJump que son las funciones que se encargan
+	// de mover al worm.
 	void update();
 private:
 	void doMove();		//This functions should not be accesible from outside the object as they are only called from update.
