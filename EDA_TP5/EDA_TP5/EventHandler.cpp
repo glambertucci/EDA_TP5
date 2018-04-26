@@ -106,7 +106,7 @@ bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 			{
 				this->events[i].time->stop();
 				float time_ = this->events[i].time->getTime();
-				if ( time_ >= 100)
+				if ( time_ >= 300)//100)//Debug
 				{
 					this->events[i].activate();
 					this->events[i].time->start();
