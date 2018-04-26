@@ -84,15 +84,14 @@ bool EventHandler::getEvent(ALLEGRO_EVENT_QUEUE * eq)
 			if (this->events[i].timerExist() && this->events[i].Event == trasformAllegroEvents(ev.keyboard.keycode)) {
 				if (!this->events[i].timerGreaterThan(100))
 				{
-					if (trasformAllegroEvents(ev.keyboard.keycode) == RIGHT_EV) {
-						this->events[i].Event = FLIP_RIGHT_EV;
-						this->events[i].activate();
-					}
-					else if (trasformAllegroEvents(ev.keyboard.keycode) == LEFT_EV) {
+					if (!this->events[i].active && this->events[i].Event == LEFT_EV) {
 						this->events[i].Event = FLIP_LEFT_EV;
 						this->events[i].activate();
 					}
-					
+					else if(!this->events[i].active && this->events[i].Event == RIGHT_EV) {
+						this->events[i].Event = FLIP_RIGHT_EV;
+						this->events[i].activate();
+					}
 				}
 			}
 					
